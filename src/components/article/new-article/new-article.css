@@ -1,0 +1,8 @@
+.container{
+  display: flex;
+  flex-direction: row
+}
+.header{
+  height: 50px;
+  background-color: blue;
+}
