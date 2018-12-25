@@ -9,10 +9,13 @@
   "dependencies": {
     "antd": "^3.10.4",
     "babel-plugin-import": "^1.11.0",
+    "bizcharts": "^3.4.1",
     "dva": "^2.4.1",
+    "highlight.js": "^9.13.1",
     "marked": "^0.5.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-simplemde-editor": "^3.6.22"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",

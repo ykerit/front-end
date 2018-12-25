@@ -13,7 +13,7 @@ const app = dva({
 // 3. Model
 app.model(require('./models/auth').default);
 app.model(require('./models/admin').default);
-app.model(require('./models/article').default)
+app.model(require('./models/article').default);
 // 4. Router
 app.router(require('./router').default);
 

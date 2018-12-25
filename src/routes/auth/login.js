@@ -5,15 +5,15 @@ const FormItem = Form.Item;
 
 class LoginForm extends Component {
   handleSubmit = (e) => {
-    const { onOk } = this.props
+    const { onOk } = this.props;
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log('form: ', values);
         onOk(values)
       }
     });
-  }
+  };
 
   render() {
     const { getFieldDecorator } = this.props.form;

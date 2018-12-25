@@ -1,11 +1,11 @@
 import React from 'react';
-import {  } from 'antd';
 import { connect } from 'dva';
+import CpuUse from './chart-component/cpu-use';
 
 function UserInfo() {
   return (
     <div>
-      那是真的牛逼
+      <CpuUse/>
     </div>
   );
 }

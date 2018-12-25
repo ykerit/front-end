@@ -1,8 +1,12 @@
-.container{
-  display: flex;
-  flex-direction: row
-}
 .header{
   height: 50px;
-  background-color: blue;
+  display: -webkit-flex;
+  align-items: center;
+}
+.vertical {
+  width: 8px;
+  right: 1px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s;
 }

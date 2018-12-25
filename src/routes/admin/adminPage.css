@@ -7,14 +7,14 @@
 
 .header{
   width: 100%;
-  height: 5%;
+  height: 7%;
   display: flex;
   flex: 1;
   align-items: center;
   background-color:#2f3542;
 }
 .main{
-  height: 90%;
+  min-height: 88%;
 }
 .footer{
   background-color: #F0F2F5;
@@ -29,7 +29,7 @@
   color: #fff;
 }
 .user{
-  margin-left: 80%;
+  margin-left: 78%;
   display: flex;
   justify-content: center;
   align-items: center;

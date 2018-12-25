@@ -1,0 +1,6 @@
+.footer{
+  height: 3%;
+  background-color: #F0F2F5;
+  display: -webkit-flex;
+  justify-content: center;
+}

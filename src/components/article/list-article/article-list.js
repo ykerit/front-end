@@ -1,16 +1,7 @@
 import React from 'react';
-import { List, Avatar, Icon } from 'antd';
-
-const listData = [];
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'http://ant.design',
-    title: `测试 ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    description: '列表测试',
-    content: '内容测试',
-  });
-}
+import { connect } from 'dva'
+import { Link } from 'dva/router'
+import { List, Icon } from 'antd';
 
 const IconText = ({ type, text }) => (
   <span>
@@ -18,33 +9,41 @@ const IconText = ({ type, text }) => (
     {text}
   </span>
 );
-function ArticleList() {
+function ArticleList({ dispatch, articleList: dataSource }) {
+  console.log(dataSource);
+  console.log(dataSource.create_time);
   return (
     <List
       itemLayout="vertical"
-      size="large"
       pagination={{
         onChange: (page) => {
-          console.log(page);
+          dispatch({
+            type: 'article/queryAllArticle',
+            payload: page - 1,
+          })
         },
-        pageSize: 3,
+        pageSize: 4,
       }}
-      dataSource={listData}
+      dataSource={dataSource}
       renderItem={item => (
         <List.Item
           key={item.title}
-          actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
-          extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
+          actions={[<IconText type="star-o" text={item.star} />, <IconText type="message" text={item.comment} />]}
         >
+          <Link to={`/article/${item.id}`}>
           <List.Item.Meta
-            avatar={<Avatar src={item.avatar} />}
-            title={<a href={item.href}>{item.title}</a>}
-            description={item.description}
+            description={item.create_time}
           />
-          {item.content}
+          {item.info}
+          </Link>
         </List.Item>
       )}/>
   )
 }
-
-export default ArticleList;
+function mapStateToProps(state) {
+  const { articleList } = state.article;
+  return {
+    articleList
+  };
+}
+export default connect(mapStateToProps)(ArticleList);

@@ -9,14 +9,7 @@ function LoginPage({dispatch,token, message, isLogined}) {
         type: 'auth/login',
         payload: values
       })
-      link();
     }
-    function link() {
-      dispatch({
-        type: 'auth/link'
-      })
-    }
-
     return (
       <LoginForm onOk={ login } />
     );
@@ -24,7 +17,6 @@ function LoginPage({dispatch,token, message, isLogined}) {
 
 function mapStateToProps(state) {
     const { token, isLogined, message } = state.auth;
-    console.log('state:', state.auth);
     return {
       token,
       isLogined,

@@ -17,6 +17,7 @@ function checkStatus(response) {
 }
 
 export default async function request(url, options) {
+  console.log(ROOT_URL+url);
   return fetch(ROOT_URL+url, { ...options })
   .then(checkStatus)
   .then(parseJSON);

@@ -1,18 +1,28 @@
+import { routerRedux } from 'dva/router';
+import { checklocalStorage } from '../utils/helper';
 
 export default {
   namespace: 'admin',
   state: {
-    chooseMenu:null,
+
   },
   reducers: {
-    changeChoose(state, action){
-      return { ...state, chooseMenu:action.payload }
-    }
+
   },
   effects: {
-
+    
   },
   subscribtions:{
+    setup({ dispatch, history }) {
+      history.listen(location => {
+          if (location.pathname === '/admin') {
+            if (checklocalStorage) {
 
+            } else {
+              routerRedux.push('/login');
+            }
+          }
+      });
+  },
   },
 }
