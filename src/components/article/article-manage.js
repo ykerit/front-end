@@ -9,6 +9,13 @@ class ArticeManage extends Component{
   state = {
     display: false,
   };
+  componentDidMount(){
+    this.props.dispatch({
+      type: 'article/queryAllArticle',
+      payload: 1
+    })
+  };
+
   handleRefresh = (value) => this.setState({display: value});
   render(){
     return (
@@ -26,7 +33,7 @@ class ArticeManage extends Component{
           </div>
         </div>
         <div style={{ display: this.state.display ? 'block' : 'none'}}>
-          <NewArticle refresh={this.handleRefresh}/>
+          <NewArticle refreshes={this.handleRefresh}/>
         </div>
       </div>
     );

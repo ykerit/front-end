@@ -7,6 +7,13 @@ import UserManage from '../../components/user/user-manage';
 import AdminManage from '../../components/user/admin-manage';
 import RoleManage from '../../components/user/role-manage';
 import ArticeManage from '../../components/article/article-manage';
+import KindManage from '../../components/kind/kind-manage'
+import TagManage from '../../components/tags/tag-manage'
+import AdminLog from '../../components/logger/admin-log';
+import UserLog from '../../components/logger/user-log';
+import OpLog from '../../components/logger/op-log';
+import PermissionManage from '../../components/permission/permission-manage';
+import { getlocalStorage } from '../../utils/helper';
 
 import style from './adminPage.css';
 const { Sider } = Layout;
@@ -15,63 +22,47 @@ class AdminPage extends Component{
   state = {
     chooseMenu: null,
   };
-  getUserList = (dispatch) => {
-    dispatch({
-      type: 'auth/queryUsers',
-    })
-  };
-
-  getRoleList = (dispatch) => {
-    dispatch({
-      type: 'auth/queryRoles',
-    })
-  };
-
-  getAdminList = (dispatch) => {
-    dispatch({
-      type: 'auth/queryAdmins',
-    })
-  };
-  getArticleList = (dispatch) => {
-    dispatch({
-      type: 'article/queryAllArticle',
-      payload: 0
-    })
-  };
 
   logout = (dispatch) => {
     dispatch({
       type: 'auth/logout'
-    })
+    });
   };
-
+  renderName = (name, is_authorization) => {
+    if (getlocalStorage('name') !== null || is_authorization){
+      return 'Hi! ' + getlocalStorage('name');
+    } else if (name !== null){
+      return 'Hi! ' + name;
+    }
+    return '未登录'
+  };
   renderComponent = (key, dispatch) => {
     const choose = parseInt(key);
     switch (choose) {
       case 1:
         return <UserInfo/>;
       case 3:
-        this.getArticleList(dispatch);
         return <ArticeManage/>;
       case 4:
         return "用户分析";
       case 5:
-        this.getAdminList(dispatch);
         return <AdminManage/>;
       case 6:
-        this.getUserList(dispatch);
         return <UserManage/>;
       case 7:
-        this.getRoleList(dispatch);
         return <RoleManage/>;
       case 8:
-        return <h1>权限管理</h1>;
+        return <PermissionManage/>;
       case 10:
-        return <h1>管理员日志</h1>;
+        return <AdminLog/>;
       case 11:
-        return <h1>用户日志</h1>;
+        return <UserLog/>;
       case 12:
-        return <h1>操作日志</h1>;
+        return <OpLog/>;
+      case 13:
+        return <KindManage/>;
+      case 14:
+        return <TagManage/>;
       default:
         break;
     }
@@ -79,7 +70,7 @@ class AdminPage extends Component{
 
   render(){
     const SubMenu = Menu.SubMenu;
-    const { dispatch } = this.props;
+    const { dispatch, name, is_authorization } = this.props;
     return (
       <div className={style.container}>
         <div className={style.header}>
@@ -87,11 +78,12 @@ class AdminPage extends Component{
           <span className={style.header_name}>Bolg后台系统</span>
           <div className={style.user}>
             <Avatar size="large" icon="user"/>
+            <span style={{ marginLeft: 5 }}>{this.renderName(name, is_authorization)}</span>
             <Icon type="bell" className={style.icon} onClick={() => {}}/>
             <Badge overflowCount={999}>
               <Icon type="message" className={style.icon} onClick={() => {}}/>
             </Badge>
-            <Icon type="poweroff" className={style.icon} onClick={() => this.logout(dispatch)}/>
+            <Icon type="poweroff" className={style.icon} onClick={() => this.logout(dispatch, is_authorization)}/>
           </div>
         </div>
         <div className={style.main}>
@@ -120,6 +112,14 @@ class AdminPage extends Component{
                   <Icon type="upload" />
                   <span style={{ textAlign: 'center' }}>权限管理</span>
                 </Menu.Item>
+                <Menu.Item key="13">
+                  <Icon type="upload" />
+                  <span style={{ textAlign: 'center' }}>分类管理</span>
+                </Menu.Item>
+                <Menu.Item key="14">
+                  <Icon type="upload" />
+                  <span style={{ textAlign: 'center' }}>标签管理</span>
+                </Menu.Item>
                 <SubMenu key="9" title={<span><Icon type="video-camera" /><span>日志管理</span></span>}>
                   <Menu.Item key="10">管理员日志</Menu.Item>
                   <Menu.Item key="11">用户日志</Menu.Item>
@@ -141,5 +141,11 @@ class AdminPage extends Component{
     );
   }
 }
-
-export default connect()(AdminPage);
+function mapStateToProps(state) {
+  const { name, is_authorization } = state.auth;
+  return {
+    name,
+    is_authorization
+  };
+}
+export default connect(mapStateToProps)(AdminPage);

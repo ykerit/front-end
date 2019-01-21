@@ -3,18 +3,17 @@ import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
 import ModalForm from '../stand-component/modal-form';
 
-class PermissionManage extends Component{
+class KindManage extends Component{
 
   state = {
     visible: false,
   };
   componentDidMount(){
     this.props.dispatch({
-      type: 'admin/queryPermission',
+      type: 'admin/queryKind',
       payload: 1
-    });
-  }
-
+    })
+  };
   showModal = () => {
     this.setState({ visible: true });
   };
@@ -32,7 +31,7 @@ class PermissionManage extends Component{
       }
       // 添加权限
       dispatch({
-        type: 'admin/createPermission',
+        type: 'admin/createKind',
         payload:values,
       });
 
@@ -43,7 +42,7 @@ class PermissionManage extends Component{
 
   handleDelete = (key, dispatch) => {
     dispatch({
-      type: 'admin/delPermission',
+      type: 'admin/delKind',
       payload: key,
     })
   };
@@ -54,28 +53,20 @@ class PermissionManage extends Component{
 
   render(){
 
-    const { permission, permission_total, dispatch } = this.props;
+    const { kind, kind_total, dispatch } = this.props;
 
     const columns = [{
       title: 'id',
       dataIndex: 'id',
       key: 'id'
-    }, {
-      title: '所属组',
-      dataIndex: 'role',
-      key: 'role'
-    }, {
-      title: '权限名',
+    },{
+      title: '分类名',
       dataIndex: 'name',
       key: 'name'
-    }, {
-      title: 'URL',
-      dataIndex: 'url',
-      key: 'url'
-    }, {
-      title: '方法',
-      dataIndex: 'method',
-      key: 'method'
+    },{
+      title: '文章数',
+      dataIndex: 'number',
+      key: 'number'
     },{
       title: '创建时间',
       dataIndex: 'create_time',
@@ -95,35 +86,31 @@ class PermissionManage extends Component{
       ),
     }];
 
-    const title = [
-      {title: '权限名称', en: 'name'},
-      {title: '所属组', en: 'role'},
-      {title: 'URL', en: 'url'},
-      {title: '方法', en: 'method'}];
+    const title = [{title: '分类名', en: 'name'}];
 
     return (
       <div>
-        <Button type="default" onClick={this.showModal}>添加权限</Button>
+        <Button type="default" onClick={this.showModal}>添加分类</Button>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={() => {this.handleCreate(dispatch)}}
           wrappedComponentRef={this.saveFormRef}
-          title="创建管理员"
+          title="创建分类"
           data={title}
         />
         <Table
           rowKey={record => record.id}
           columns={columns}
-          dataSource={permission}
+          dataSource={kind}
           pagination={{
             onChange: (page) => {
               dispatch({
-                type: 'admin/queryPermission',
+                type: 'admin/queryKind',
                 payload: page,
               })
             },
-            total: permission_total,
+            total: kind_total,
             pageSize: 10,
           }}
         />
@@ -132,14 +119,14 @@ class PermissionManage extends Component{
   }
 }
 
-PermissionManage.propTypes = {
+KindManage.propTypes = {
 };
 function mapStateToProps(state) {
-  const { permission, permission_total } = state.admin;
+  const { kind, kind_total } = state.admin;
   return {
-    permission,
-    permission_total
+    kind,
+    kind_total
   };
 }
 
-export default connect(mapStateToProps)(PermissionManage)
+export default connect(mapStateToProps)(KindManage)

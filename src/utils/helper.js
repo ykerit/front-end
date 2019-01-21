@@ -4,12 +4,11 @@ export function setlocalStorage(key,value){
 export function getlocalStorage(key){
   return localStorage.getItem(key);
 }
-export function dellocalStorage(key) {
-  localStorage.removeItem(key)
+export function dellocalStorage() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('name');
+  localStorage.removeItem('id');
 }
 export function checklocalStorage(){
-  if (getlocalStorage('token') != null) {
-    return true;
-  }
-  return false;
+  return getlocalStorage('token') != null;
 }

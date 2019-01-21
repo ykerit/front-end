@@ -8,6 +8,13 @@ class UserManage extends  Component{
     visible: false,
   };
 
+  componentDidMount(){
+    this.props.dispatch({
+      type: 'auth/queryUsers',
+      payload: 1
+    })
+  };
+
   showModal = () => {
     this.setState({ visible: true });
   };
@@ -43,8 +50,7 @@ class UserManage extends  Component{
   };
 
   render(){
-    const { userData, dispatch } = this.props;
-
+    const { userData, dispatch, user_total} = this.props;
     const columns = [{
       title: 'id',
       dataIndex: 'id',
@@ -89,19 +95,34 @@ class UserManage extends  Component{
           title="创建用户"
           data={title}
         />
-        <Table columns={columns} dataSource={userData}/>
+        <Table
+          rowKey={record => record.id}
+          columns={columns}
+          dataSource={userData}
+          pagination={{
+            onChange: (page) => {
+              dispatch({
+                type: 'auth/queryUsers',
+                payload: page,
+              })
+            },
+            total: user_total,
+            pageSize: 10,
+          }}
+        />
       </div>
     );
 }
 
-};
+}
 
 UserManage.propTypes = {
 };
 function mapStateToProps(state) {
-  const { userData } = state.auth;
+  const { userData, user_total} = state.auth;
   return {
     userData,
+    user_total
   };
 }
 

@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Checkbox, Layout } from 'antd';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Link} from 'dva/router'
 
 const FormItem = Form.Item;
 
 class LoginForm extends Component {
+
   handleSubmit = (e) => {
+
     const { onOk } = this.props;
+
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('form: ', values);
-        onOk(values)
+        onOk(values);
       }
     });
   };
 
+
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Layout style={{ justifyContent:"center", alignItems: "center", height:"100%", flexDirection: "column"}}>
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
           {getFieldDecorator('userName', {
@@ -45,8 +48,8 @@ class LoginForm extends Component {
             登录
           </Button>
         </FormItem>
+        没有账号？<Link to="/register" >现在注册!</Link>
       </Form>
-      </Layout>
     );
   }
 }

@@ -9,6 +9,13 @@ class AdminManage extends Component{
     visible: false,
   };
 
+  componentDidMount(){
+    this.props.dispatch({
+      type: 'auth/queryAdmins',
+      payload: 1
+    })
+  };
+
   showModal = () => {
     this.setState({ visible: true });
   };
@@ -48,7 +55,7 @@ class AdminManage extends Component{
 
   render(){
 
-    const { adminData, dispatch } = this.props;
+    const { adminData, dispatch, admin_total  } = this.props;
 
     const columns = [{
       title: 'id',
@@ -94,7 +101,21 @@ class AdminManage extends Component{
           title="创建管理员"
           data={title}
         />
-        <Table columns={columns} dataSource={adminData}/>
+        <Table
+          rowKey={record => record.id}
+          columns={columns}
+          dataSource={adminData}
+          pagination={{
+            onChange: (page) => {
+              dispatch({
+                type: 'auth/queryAdmins',
+                payload: page,
+              })
+            },
+            total: admin_total,
+            pageSize: 10,
+          }}
+        />
       </div>
     );
   }
@@ -103,9 +124,10 @@ class AdminManage extends Component{
 AdminManage.propTypes = {
 };
 function mapStateToProps(state) {
-  const { adminData } = state.auth;
+  const { adminData, admin_total } = state.auth;
   return {
     adminData,
+    admin_total
   };
 }
 

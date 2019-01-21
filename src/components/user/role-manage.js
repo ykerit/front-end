@@ -9,6 +9,12 @@ class RoleManage extends Component{
     visible: false,
   };
 
+  componentDidMount(){
+    this.props.dispatch({
+      type: 'auth/queryRoles',
+    })
+  };
+
   showModal = () => {
     this.setState({ visible: true });
   };
@@ -92,7 +98,10 @@ class RoleManage extends Component{
           title="创建角色"
           data={title}
         />
-        <Table columns={columns} dataSource={roleData}/>
+        <Table
+          rowKey={record => record.id}
+          columns={columns}
+          dataSource={roleData}/>
       </div>
     );
   }

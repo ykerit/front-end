@@ -1,10 +1,13 @@
-import {createArticle, queryAllArticle, queryArticle} from "../services/article";
+import {createArticle, queryAllArticle, queryArticle, createComment, queryComment} from "../services/article";
 
 export default {
   namespace: 'article',
   state: {
     articleList: [],
     articleContent: [],
+    comment: [],
+    total: null,
+    comment_total: null,
   },
   reducers: {
     querySuccess(state, action){
@@ -30,15 +33,33 @@ export default {
         })
       }
     },
+    *queryComment({ payload }, {call, put}){
+      const data = yield call(queryComment, payload);
+      if (data && data.status === 200){
+        yield put({
+          type: 'querySuccess',
+          payload:data
+        })
+      }
+    },
     *createArticle({ payload }, {call, put}){
       const data = yield call(createArticle, payload);
       if (data && data.status === 200){
         yield  put({
           type: 'queryAllArticle',
-          payload: 0,
+          payload: 1,
         })
       }
     },
+    *createComment({ payload }, {call, put}){
+      const data = yield call(createComment, payload);
+      if (data && data.status === 200){
+        yield put({
+          type: 'queryComment',
+          payload: {article: 1, page_size: 1},
+        })
+      }
+    }
   },
   subscribtions: {
 

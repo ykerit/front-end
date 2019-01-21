@@ -1,0 +1,28 @@
+
+.footer{
+  background-color: #F0F2F5;
+  opacity: 0.8;
+  height: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.content{
+  display: -webkit-flex;
+  flex-direction: row;
+  min-height: 98%;
+}
+.middle{
+  width: 50%;
+}
+.another{
+  width: 25%;
+}
+.other{
+  width: 25%;
+}
+.comment{
+  display: -webkit-flex;
+  justify-content: center;
+}

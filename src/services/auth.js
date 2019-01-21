@@ -1,7 +1,8 @@
 import request from '../utils/request';
+import authRequest from '../utils/auth'
 
-export function queryUser() {
-  return request('user')
+export function queryUser(page_size) {
+  return request(`user?page_size=${page_size}`)
 }
 
 export function putUser(id, values) {
@@ -27,8 +28,8 @@ export function delUser(id) {
   })
 }
 
-export function queryRole() {
-  return request('role')
+export function queryRole(page_size) {
+  return request(`role?page_size=${page_size}`)
 }
 
 export function createRole(values) {
@@ -47,8 +48,8 @@ export function delRole(id) {
   })
 }
 
-export function queryAdmin() {
-  return request('admin')
+export function queryAdmin(page_size) {
+  return request(`admin?page_size=${page_size}`)
 }
 
 export function createAdmin(values) {
@@ -71,7 +72,17 @@ export function login(values){
   let formData = new FormData();
   formData.append('name', values.userName);
   formData.append('password', values.password);
-  return request('login',{
+  return authRequest('login',{
+    method: 'POST',
+    body: formData
+  });
+}
+
+export function register(values) {
+  let formData = new FormData();
+  formData.append('name', values.nickname);
+  formData.append('password', values.password);
+  return authRequest('register',{
     method: 'POST',
     body: formData
   });

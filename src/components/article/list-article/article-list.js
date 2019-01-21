@@ -9,9 +9,7 @@ const IconText = ({ type, text }) => (
     {text}
   </span>
 );
-function ArticleList({ dispatch, articleList: dataSource }) {
-  console.log(dataSource);
-  console.log(dataSource.create_time);
+function ArticleList({ dispatch, articleList, total }) {
   return (
     <List
       itemLayout="vertical"
@@ -19,31 +17,35 @@ function ArticleList({ dispatch, articleList: dataSource }) {
         onChange: (page) => {
           dispatch({
             type: 'article/queryAllArticle',
-            payload: page - 1,
+            payload: page,
           })
         },
         pageSize: 4,
+        total: total
       }}
-      dataSource={dataSource}
+      dataSource={articleList}
       renderItem={item => (
         <List.Item
           key={item.title}
-          actions={[<IconText type="star-o" text={item.star} />, <IconText type="message" text={item.comment} />]}
+          actions={[<IconText type="star-o" text={item.star} />,
+            <IconText type="message" text={item.number} />,
+            <IconText type="clock-circle" text={item.create_time}/>]}
         >
           <Link to={`/article/${item.id}`}>
           <List.Item.Meta
-            description={item.create_time}
+            title={item.title}
+            description={item.description}
           />
-          {item.info}
           </Link>
         </List.Item>
       )}/>
   )
 }
 function mapStateToProps(state) {
-  const { articleList } = state.article;
+  const { articleList, total } = state.article;
   return {
-    articleList
+    articleList,
+    total
   };
 }
 export default connect(mapStateToProps)(ArticleList);

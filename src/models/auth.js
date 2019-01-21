@@ -1,12 +1,18 @@
 import {login, queryUser, createRole, queryRole,
-  queryAdmin, createAdmin, createUser, delUser, delAdmin, delRole} from '../services/auth';
+  queryAdmin, createAdmin, createUser, delUser, delAdmin, delRole, register} from '../services/auth';
 import { routerRedux } from 'dva/router';
+import { message } from 'antd'
 import { setlocalStorage, dellocalStorage } from '../utils/helper';
+
+message.config({
+  top: 200,
+});
 
 
 export default {
   namespace: 'auth',
   state: {
+    id: '',
     token: '',
     is_authorization: false,
     name: '',
@@ -14,19 +20,21 @@ export default {
     userData: [],
     roleData: [],
     adminData: [],
+    admin_total: null,
+    user_total: null
   },
   reducers: {
     loginSuccess(state, action) {
+      setlocalStorage('id', action.payload.id);
       return { ...state, ...action.payload, message: '登录成功' };
     },
     loginErro(state, action) {
       return { ...state, ...action.payload, message: '登录失败'}
     },
-    logout(state){
-      dellocalStorage('token');
-      routerRedux.push('/login');
-      return { ...state, name: '', message:'登出成功', token: '', is_authorization: false,
-    userData: []}
+    logoutSuccess(state){
+      return { ...state, id:'', name: '',
+        message:'登出成功', token: '',
+        is_authorization: false, userData: []}
     },
     querySuccess(state, action){
       return { ...state, ...action.payload}
@@ -37,12 +45,38 @@ export default {
       const data = yield call(login, payload);
       if (data && data.status === 200) {
         setlocalStorage('token', data.token);
+        setlocalStorage('name', data.name);
         yield put({
           type:'loginSuccess',
           payload: data
         });
         yield put(routerRedux.push('/admin'))
       } else{
+        yield put({
+          type: 'loginErro'
+        });
+        yield message.error('登录失败, 用户名或密码错误!')
+      }
+    },
+    *logout({ payload },{ put }){
+      dellocalStorage();
+      console.log('logout');
+      yield put(routerRedux.push('/login'));
+      yield put({
+        type: 'logoutSuccess'
+      });
+    },
+    *register({ payload }, {call, put}){
+      const data = yield call(register, payload);
+      if (data && data.status === 200) {
+        setlocalStorage('token', data.token);
+        setlocalStorage('name', data.name);
+        yield put({
+          type:'loginSuccess',
+          payload: data
+        });
+        yield put(routerRedux.push('/admin'))
+      }else {
         yield put({
           type: 'loginErro'
         })
@@ -54,9 +88,7 @@ export default {
       if (data && data.status === 200) {
         yield put({
           type: 'querySuccess',
-          payload: {
-            userData: data.user,
-          }
+          payload: data
         })
       }
     },
@@ -65,9 +97,7 @@ export default {
       if (data && data.status === 200){
         yield  put({
           type: 'querySuccess',
-          payload: {
-            roleData: data.role,
-          }
+          payload: data
         })
       }
     },
@@ -77,9 +107,7 @@ export default {
       if (data && data.status === 200){
         yield put({
           type: 'querySuccess',
-          payload: {
-            adminData: data.admin,
-          }
+          payload: data
         })
       }
     },
@@ -87,7 +115,7 @@ export default {
       const data = yield call(createRole, payload);
       if (data && data.status === 200){
         yield put({
-          type: 'queryRoles'
+          type: 'queryRoles',
         })
       }
     },
@@ -95,7 +123,8 @@ export default {
       const data = yield call(createAdmin, payload);
       if (data && data.status === 200){
         yield put({
-          type: 'queryAdmins'
+          type: 'queryAdmins',
+          payload: 1
         })
       }
     },
@@ -103,7 +132,8 @@ export default {
       const data = yield call(createUser, payload);
       if (data && data.status === 200){
         yield put({
-          type: 'queryUsers'
+          type: 'queryUsers',
+          payload: 1
         })
       }
     },
@@ -111,7 +141,8 @@ export default {
       const data = yield call(delUser, payload);
       if (data && data.status === 200){
         yield put({
-          type: 'queryUsers'
+          type: 'queryUsers',
+          payload: 1
         })
       }
     },
@@ -120,7 +151,8 @@ export default {
       const data = yield call(delAdmin, payload);
       if (data && data.status === 200){
         yield put({
-          type: 'queryAdmins'
+          type: 'queryAdmins',
+          payload: 1
         })
       }
     },

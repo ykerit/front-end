@@ -14,12 +14,12 @@
   background-color:#2f3542;
 }
 .main{
-  min-height: 88%;
+  min-height: 90%;
 }
 .footer{
   background-color: #F0F2F5;
   opacity: 0.8;
-  height: 5%;
+  height: 3%;
   display: flex;
   justify-content: center;
   align-items: center
@@ -29,7 +29,7 @@
   color: #fff;
 }
 .user{
-  margin-left: 78%;
+  margin-left: 75%;
   display: flex;
   justify-content: center;
   align-items: center;
