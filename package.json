@@ -7,6 +7,9 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "antd": "^3.10.4",
     "babel-plugin-import": "^1.11.0",
     "bizcharts": "^3.4.1",
@@ -14,8 +17,7 @@
     "highlight.js": "^9.13.1",
     "marked": "^0.5.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-simplemde-editor": "^3.6.22"
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",

@@ -55,7 +55,7 @@ class ArticleContent extends Component{
         <div id="content" className={styles.content}>
           <div className={styles.another}> </div>
           <div className={styles.middle}>
-            <div dangerouslySetInnerHTML={{__html: data.html}}>
+            <div dangerouslySetInnerHTML={{__html: data.preview}}>
             </div>
           </div>
           <div className={styles.other}>

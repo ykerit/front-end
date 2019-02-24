@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Button } from 'antd';
-import NewArticle from './new-article/article-newArticle';
+import { Button, Row } from 'antd';
+import { routerRedux} from 'dva/router';
 import ArticleList from './list-article/article-list';
-import style from './article-manage.css';
 
 class ArticeManage extends Component{
   state = {
-    display: false,
+    display: false
   };
   componentDidMount(){
     this.props.dispatch({
@@ -16,25 +15,23 @@ class ArticeManage extends Component{
     })
   };
 
-  handleRefresh = (value) => this.setState({display: value});
   render(){
     return (
-      <div>
-        <div className={style.container}>
-          <div style={{ display: this.state.display ? 'none' : 'block'}}>
-            <Button type="primary"
-                    style={{ marginTop: 10 }}
-                    onClick={() => this.setState({ display: true })}>
+      <div style={{ background: '#ECECEC', padding: '10px', height: 700 }}>
+        <Row>
+          <Row>
+            <Button
+              type="primary"
+              style={{ marginTop: 10, marginLeft: 20 }}
+              onClick={() => this.props.dispatch(routerRedux.push('/mdeditor'))}>
               新建文章
             </Button>
-          </div>
-          <div style={{ display: this.state.display ? 'none' : 'block'}} className={style.list}>
+          </Row>
+          <Row style={{height: 20}}/>
+          <Row>
             <ArticleList/>
-          </div>
-        </div>
-        <div style={{ display: this.state.display ? 'block' : 'none'}}>
-          <NewArticle refreshes={this.handleRefresh}/>
-        </div>
+          </Row>
+        </Row>
       </div>
     );
   }

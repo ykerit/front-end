@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Table, Popconfirm, Button } from 'antd';
+import { Table, Popconfirm, Button, Row } from 'antd';
 import ModalForm from '../stand-component/modal-form';
 
 class PermissionManage extends Component{
@@ -102,31 +102,36 @@ class PermissionManage extends Component{
       {title: '方法', en: 'method'}];
 
     return (
-      <div>
-        <Button type="default" onClick={this.showModal}>添加权限</Button>
-        <ModalForm
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={() => {this.handleCreate(dispatch)}}
-          wrappedComponentRef={this.saveFormRef}
-          title="创建管理员"
-          data={title}
-        />
-        <Table
-          rowKey={record => record.id}
-          columns={columns}
-          dataSource={permission}
-          pagination={{
-            onChange: (page) => {
-              dispatch({
-                type: 'admin/queryPermission',
-                payload: page,
-              })
-            },
-            total: permission_total,
-            pageSize: 10,
-          }}
-        />
+      <div style={{ background: '#ECECEC', padding: '20px', height: 700 }}>
+        <Row>
+          <Button type="primary" onClick={this.showModal}>添加权限</Button>
+        </Row>
+        <Row style={{height: 20}}/>
+        <Row>
+          <ModalForm
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={() => {this.handleCreate(dispatch)}}
+            wrappedComponentRef={this.saveFormRef}
+            title="创建管理员"
+            data={title}
+          />
+          <Table
+            rowKey={record => record.id}
+            columns={columns}
+            dataSource={permission}
+            pagination={{
+              onChange: (page) => {
+                dispatch({
+                  type: 'admin/queryPermission',
+                  payload: page,
+                })
+              },
+              total: permission_total,
+              pageSize: 10,
+            }}
+          />
+        </Row>
       </div>
     );
   }

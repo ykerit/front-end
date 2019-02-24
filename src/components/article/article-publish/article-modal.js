@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import { Modal, Form, Button, Switch, Select, Input } from 'antd';
+import { Modal, Form, Switch, Select } from 'antd';
+import TagPlugin from './plugin/tag-plugin';
+import KindPlugin from './plugin/kind-plugin'
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 class NewModal extends Component{
 
   render(){
-    const { onOk, onCancel, visible } = this.props;
+    const { onOk, onCancel, visible, receiveTag, receiveKind } = this.props;
+
     return (
       <Modal
         visible={visible}
@@ -19,13 +22,10 @@ class NewModal extends Component{
         <Form layout="vertical">
           <FormItem>
             文章标签：
-            <Input style={{width: 50}} disabled/>
-            <Button type="primary" shape="circle" icon="plus"/>
+            <TagPlugin receiveTag={receiveTag}/>
           </FormItem>
           <FormItem>
-            个人分类：
-            <Input style={{width: 50}} disabled/>
-            <Button type="primary" shape="circle" icon="plus"/>
+            <KindPlugin receiveKind={receiveKind}/>
           </FormItem>
           <FormItem>
             文章类型：

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Table, Popconfirm, Button } from 'antd';
+import { Table, Popconfirm, Button, Row } from 'antd';
 import ModalForm from '../stand-component/modal-form';
 
 class AdminManage extends Component{
@@ -91,31 +91,36 @@ class AdminManage extends Component{
     const title = [{title: '姓名', en: 'name'}, {title: '密码', en: 'password'}];
 
     return (
-      <div>
-        <Button type="default" onClick={this.showModal}>添加管理员</Button>
-        <ModalForm
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={() => {this.handleCreate(dispatch)}}
-          wrappedComponentRef={this.saveFormRef}
-          title="创建管理员"
-          data={title}
-        />
-        <Table
-          rowKey={record => record.id}
-          columns={columns}
-          dataSource={adminData}
-          pagination={{
-            onChange: (page) => {
-              dispatch({
-                type: 'auth/queryAdmins',
-                payload: page,
-              })
-            },
-            total: admin_total,
-            pageSize: 10,
-          }}
-        />
+      <div style={{ background: '#ECECEC', padding: '20px', height: 700 }}>
+        <Row>
+          <Button type="primary" icon="user-add" onClick={this.showModal}>添加管理员</Button>
+        </Row>
+        <Row style={{height: 20}}/>
+        <Row>
+          <ModalForm
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={() => {this.handleCreate(dispatch)}}
+            wrappedComponentRef={this.saveFormRef}
+            title="创建管理员"
+            data={title}
+          />
+          <Table
+            rowKey={record => record.id}
+            columns={columns}
+            dataSource={adminData}
+            pagination={{
+              onChange: (page) => {
+                dispatch({
+                  type: 'auth/queryAdmins',
+                  payload: page,
+                })
+              },
+              total: admin_total,
+              pageSize: 10,
+            }}
+          />
+        </Row>
       </div>
     );
   }

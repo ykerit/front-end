@@ -5,7 +5,9 @@ import IndexPage from './routes/index/IndexPage';
 import AdminPage from './routes/admin/adminPage';
 import LoginPage from './routes/auth/login/loginPage';
 import RegisterPage from './routes/auth/register/registerPage';
+import MdeEditorPage from './routes/mdeditor/mdeditor';
 import ArticleContent from './components/article/article-content/article-content';
+import Test from './routes/test'
 
 function RouterConfig({ history }) {
   return (
@@ -16,6 +18,8 @@ function RouterConfig({ history }) {
         <Route path="/login" exact component={LoginPage} />
         <Route path="/register" exact component={RegisterPage}/>
         <Route path="/article/:id" exact component={ArticleContent}/>
+        <AuthorizedRoute path="/mdeditor" exact component={MdeEditorPage}/>
+        <Route path="/test" exact component={Test}/>
       </Switch>
     </Router>
   );

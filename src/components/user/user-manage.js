@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'dva';
-import { Table, Popconfirm, Button } from 'antd';
+import { Table, Popconfirm, Button, Row } from 'antd';
 import ModalForm from '../stand-component/modal-form';
 
 class UserManage extends  Component{
@@ -85,31 +85,36 @@ class UserManage extends  Component{
     const title = [{title: '姓名', en: 'name'}, {title: '密码', en: 'password'}];
 
     return (
-      <div>
-        <Button type="default" onClick={this.showModal}>添加用户</Button>
-        <ModalForm
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={() => {this.handleCreate(dispatch)}}
-          wrappedComponentRef={this.saveFormRef}
-          title="创建用户"
-          data={title}
-        />
-        <Table
-          rowKey={record => record.id}
-          columns={columns}
-          dataSource={userData}
-          pagination={{
-            onChange: (page) => {
-              dispatch({
-                type: 'auth/queryUsers',
-                payload: page,
-              })
-            },
-            total: user_total,
-            pageSize: 10,
-          }}
-        />
+      <div style={{ background: '#ECECEC', padding: '20px', height: 700 }}>
+        <Row>
+          <Button type="primary" onClick={this.showModal} icon="usergroup-add">添加用户</Button>
+        </Row>
+        <Row style={{height: 20}}/>
+        <Row>
+          <ModalForm
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={() => {this.handleCreate(dispatch)}}
+            wrappedComponentRef={this.saveFormRef}
+            title="创建用户"
+            data={title}
+          />
+          <Table
+            rowKey={record => record.id}
+            columns={columns}
+            dataSource={userData}
+            pagination={{
+              onChange: (page) => {
+                dispatch({
+                  type: 'auth/queryUsers',
+                  payload: page,
+                })
+              },
+              total: user_total,
+              pageSize: 10,
+            }}
+          />
+        </Row>
       </div>
     );
 }

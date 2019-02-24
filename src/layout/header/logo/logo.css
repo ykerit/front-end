@@ -1,0 +1,23 @@
+.logo {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+}
+.logo img {
+  height: 40px;
+}
+
+.logo h1 {
+  padding: 0;
+  font-size: 20px;
+  margin: 0 0 0 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: transform 300ms;
+  transform-origin: left;
+  transform: scale(1);
+}
+
+.logo:global(.title-hide) {
+  transform: scale(0);
+}

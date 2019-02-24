@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Table, Popconfirm, Button } from 'antd';
+import { Table, Popconfirm, Button, Row } from 'antd';
 import ModalForm from '../stand-component/modal-form';
 
 class KindManage extends Component{
@@ -89,31 +89,36 @@ class KindManage extends Component{
     const title = [{title: '分类名', en: 'name'}];
 
     return (
-      <div>
-        <Button type="default" onClick={this.showModal}>添加分类</Button>
-        <ModalForm
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={() => {this.handleCreate(dispatch)}}
-          wrappedComponentRef={this.saveFormRef}
-          title="创建分类"
-          data={title}
-        />
-        <Table
-          rowKey={record => record.id}
-          columns={columns}
-          dataSource={kind}
-          pagination={{
-            onChange: (page) => {
-              dispatch({
-                type: 'admin/queryKind',
-                payload: page,
-              })
-            },
-            total: kind_total,
-            pageSize: 10,
-          }}
-        />
+      <div style={{ background: '#ECECEC', padding: '20px', height: 700 }}>
+        <Row>
+          <Button type="primary" onClick={this.showModal}>添加分类</Button>
+        </Row>
+        <Row style={{height: 20}}/>
+        <Row>
+          <ModalForm
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={() => {this.handleCreate(dispatch)}}
+            wrappedComponentRef={this.saveFormRef}
+            title="创建分类"
+            data={title}
+          />
+          <Table
+            rowKey={record => record.id}
+            columns={columns}
+            dataSource={kind}
+            pagination={{
+              onChange: (page) => {
+                dispatch({
+                  type: 'admin/queryKind',
+                  payload: page,
+                })
+              },
+              total: kind_total,
+              pageSize: 10,
+            }}
+          />
+        </Row>
       </div>
     );
   }
