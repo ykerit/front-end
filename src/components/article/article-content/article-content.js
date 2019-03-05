@@ -46,7 +46,6 @@ class ArticleContent extends Component{
 
   render(){
     const { articleContent, comment, dispatch, comment_total } = this.props;
-
     const data = {...articleContent[0]};
 
     return (

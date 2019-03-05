@@ -21,7 +21,7 @@ export default {
     adminLog_total: null,
     kind_total: null,
     tag_total: null,
-    permission_total: null
+    permission_total: null,
   },
   reducers: {
     querySuccess(state, action){

@@ -54,3 +54,4 @@ export function delPermission(id) {
     method: 'DELETE',
   })
 }
+

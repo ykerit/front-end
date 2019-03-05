@@ -12,6 +12,7 @@ const IconText = ({ type, text }) => (
 function ArticleList({ dispatch, articleList, total }) {
   return (
     <List
+      style={{ padding: 6 }}
       itemLayout="vertical"
       pagination={{
         onChange: (page) => {

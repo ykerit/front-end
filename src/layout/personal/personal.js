@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Avatar, Icon, Badge } from 'antd';
 import {connect} from 'dva'
 import style from './personal.css'
@@ -19,29 +19,31 @@ function _renderName(name, is_authorization) {
   return '未登录'
 }
 
-function Personal({name, is_authorization, dispatch}) {
-
-  return (
-    <div className={style.container}>
-      <Avatar size="large" icon="user"/>
-      <span>{_renderName(name, is_authorization)}</span>
-      <span><Icon type="bell" onClick={() => {}}/></span>
-      <span>
+class Personal extends Component{
+  render() {
+    const { image_url, name, is_authorization, dispatch } = this.props;
+    return (
+      <div className={style.container}>
+        <Avatar size="large" icon="user" src={image_url}/>
+        <span>{_renderName(name, is_authorization)}</span>
+        <span><Icon type="bell" onClick={() => {}}/></span>
+        <span>
         <Badge overflowCount={999}>
         <Icon type="message"/>
       </Badge>
       </span>
-      <span><Icon type="poweroff" onClick={() => logout(dispatch)}/></span>
-    </div>
-  );
+        <span><Icon type="poweroff" onClick={() => logout(dispatch)}/></span>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-  const { name, is_authorization, dispatch } = state.auth;
+  const { name, is_authorization, image_url } = state.auth;
   return {
     name,
     is_authorization,
-    dispatch
+    image_url
   };
 }
 

@@ -12,7 +12,7 @@ class ImageModal extends Component{
     const { getFieldDecorator } = this.props.form;
     const props = {
       name: 'file',
-      action: '//127.0.0.1:5000/api/image',
+      action: '//127.0.0.1:5000/api/image?type=markdown',
       headers: {
         'Authorization': getlocalStorage('token'),
       },

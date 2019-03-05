@@ -56,7 +56,7 @@ export default {
       if (data && data.status === 200){
         yield put({
           type: 'queryComment',
-          payload: {article: 1, page_size: 1},
+          payload: {article: payload.article_id, page_size: 1},
         })
       }
     }

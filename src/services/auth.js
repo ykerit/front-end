@@ -87,3 +87,9 @@ export function register(values) {
     body: formData
   });
 }
+export function UploadImage(values) {
+  return request(`image?type=avatar`, {
+    method: 'POST',
+    body: values
+  })
+}

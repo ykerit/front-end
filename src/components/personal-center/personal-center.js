@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { Statistic, Card, Row, Col, Icon, Avatar, List, Button, Popconfirm } from 'antd';
+import { Statistic, Card, Row, Col, Icon,
+  Avatar, List, Button, Popconfirm, Tooltip } from 'antd';
+import AvatarChange from '../stand-component/avatar-change';
 import { connect } from 'dva';
 const { Meta } = Card;
 
 class PersonalCenter extends Component{
 
+  state = {
+    visible: false,
+  };
+
   render(){
+    const { image_url, name } = this.props;
     const data = [
       {
         title: 'Ant Design Title 1',
@@ -68,16 +75,34 @@ class PersonalCenter extends Component{
         <Row gutter={16}>
           <Col span={6}>
             <Card
-              style={{ width: 300 }}
+              style={{ width: 420 }}
               cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
-              actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
+              actions={[
+                <Tooltip
+                  title="修改签名"
+                  placement="bottom"
+                >
+                  <Icon type="message" />
+                </Tooltip>,
+                <Tooltip
+                  title="更换头像"
+                  placement="bottom"
+                >
+                  <Icon type="picture" onClick={() => this.setState({visible: true})}/>
+                </Tooltip>]}
             >
               <Meta
-                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                title="Card title"
-                description="This is the description"
+                avatar={<Avatar src={image_url} size="large"/>}
+                title={name}
+                description="签名"
               />
             </Card>
+            <AvatarChange
+              visible={this.state.visible}
+              onCancel={() => this.setState({visible: false})}
+              changeDisplay={() => this.setState({visible: false})}
+              dispatch={this.props.dispatch}
+            />
           </Col>
           <Col span={6}>
             <Card
@@ -158,6 +183,12 @@ class PersonalCenter extends Component{
     );
   }
 }
+function mapStateToProps(state) {
+  const { image_url, name } = state.auth;
+  return {
+    image_url,
+    name
+  };
+}
 
-
-export default connect()(PersonalCenter)
+export default connect(mapStateToProps)(PersonalCenter)

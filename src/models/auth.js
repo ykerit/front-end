@@ -1,5 +1,5 @@
 import {login, queryUser, createRole, queryRole,
-  queryAdmin, createAdmin, createUser, delUser, delAdmin, delRole, register} from '../services/auth';
+  queryAdmin, createAdmin, createUser, delUser, delAdmin, delRole, register, UploadImage} from '../services/auth';
 import { routerRedux } from 'dva/router';
 import { message } from 'antd'
 import { setlocalStorage, dellocalStorage } from '../utils/helper';
@@ -15,6 +15,7 @@ export default {
     id: '',
     token: '',
     is_authorization: false,
+    image_url: '',
     name: '',
     message: '',
     userData: [],
@@ -39,6 +40,9 @@ export default {
     querySuccess(state, action){
       return { ...state, ...action.payload}
     },
+    queryImage(state, action){
+      return {image_url: action.payload}
+    }
   },
   effects: {
     *login({ payload }, {call, put}) {
@@ -165,7 +169,15 @@ export default {
         })
       }
     },
-
+    *UploadAvatar({ payload }, {call, put}){
+      const data = yield call(UploadImage, payload);
+      if (data && data.status === 200){
+        yield put({
+          type: 'queryImage',
+          payload: data.image_url
+        })
+      }
+    }
   },
   subscriptions: {
     setup({ dispatch, history }) {

@@ -1,12 +1,12 @@
 {
-  "env": {
-    "development": {
-      "proxy": {
-        "/api": {
-          "target": "http://127.0.0.1:5000/",
-          "changeOrigin": true,
-        }
-      }
+  "proxy": {
+    "/api": {
+      "target": "http://47.101.195.21:80",
+      "changeOrigin": true
+    },
+    "/auth": {
+       "target": "http://47.101.195.21:80",
+       "changeOrigin": true
     }
   }
 }
