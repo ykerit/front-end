@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import {
-  Form, Input, Tooltip, Icon, Checkbox, Button } from 'antd';
+import { Form, Input, Tooltip,
+  Icon, Checkbox, Button } from 'antd';
+import style from './register.css';
 
 
 class RegistrationForm extends Component {
@@ -57,65 +58,69 @@ class RegistrationForm extends Component {
       },
     };
 
-
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Item
-          {...formItemLayout}
-          label={(
-            <span>
+      <div className={style.formContent}>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Item>
+            <span/>
+          </Form.Item>
+          <Form.Item
+            {...formItemLayout}
+            label={(
+              <span>
               用户名&nbsp;
-              <Tooltip title="想叫啥?">
+                <Tooltip title="想叫啥?">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
-          )}
-        >
-          {getFieldDecorator('nickname', {
-            rules: [{ required: true, message: '请输入用户名!', whitespace: true }],
-          })(
-            <Input />
-          )}
-        </Form.Item>
-        <Form.Item
-          {...formItemLayout}
-          label="密码"
-        >
-          {getFieldDecorator('password', {
-            rules: [{
-              required: true, message: '请输入密码!',
-            }, {
-              validator: this.validateToNextPassword,
-            }],
-          })(
-            <Input type="password" />
-          )}
-        </Form.Item>
-        <Form.Item
-          {...formItemLayout}
-          label="确认密码"
-        >
-          {getFieldDecorator('confirm', {
-            rules: [{
-              required: true, message: '请输入确认密码!',
-            }, {
-              validator: this.compareToFirstPassword,
-            }],
-          })(
-            <Input type="password" onBlur={this.handleConfirmBlur} />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('agreement', {
-            valuePropName: 'checked',
-          })(
-            <Checkbox>我已经阅读 <a href="">使用协议</a></Checkbox>
-          )}
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" block>注册</Button>
-        </Form.Item>
-      </Form>
+            )}
+          >
+            {getFieldDecorator('nickname', {
+              rules: [{ required: true, message: '请输入用户名!', whitespace: true }],
+            })(
+              <Input />
+            )}
+          </Form.Item>
+          <Form.Item
+            {...formItemLayout}
+            label="密码"
+          >
+            {getFieldDecorator('password', {
+              rules: [{
+                required: true, message: '请输入密码!',
+              }, {
+                validator: this.validateToNextPassword,
+              }],
+            })(
+              <Input type="password" />
+            )}
+          </Form.Item>
+          <Form.Item
+            {...formItemLayout}
+            label="确认密码"
+          >
+            {getFieldDecorator('confirm', {
+              rules: [{
+                required: true, message: '请输入确认密码!',
+              }, {
+                validator: this.compareToFirstPassword,
+              }],
+            })(
+              <Input type="password" onBlur={this.handleConfirmBlur} />
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('agreement', {
+              valuePropName: 'checked',
+            })(
+              <Checkbox>我已经阅读 <a href="">使用协议</a></Checkbox>
+            )}
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" block>注册</Button>
+          </Form.Item>
+        </Form>
+      </div>
     );
   }
 }

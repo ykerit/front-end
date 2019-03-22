@@ -1,6 +1,5 @@
 import React from "react";
 import { List, Comment, Form, Input, Button } from 'antd';
-// import moment from 'moment';
 import styles from './comment.css';
 const TextArea = Input.TextArea;
 

@@ -3,6 +3,9 @@ import { connect } from 'dva';
 import { Table } from 'antd';
 
 class AdminLog extends Component{
+  state = {
+    current: null
+  };
 
   handleDelete = (key, dispatch) => {
     dispatch({
@@ -47,11 +50,13 @@ class AdminLog extends Component{
           dataSource={AdminLog}
           pagination={{
             onChange: (page) => {
+              this.setState({current: page});
               dispatch({
                 type: 'admin/queryLog',
                 payload: {type: 'adminLog', pageSize: page},
               })
             },
+            current: this.state.current,
             total: adminLog_total,
             pageSize: 10,
           }}

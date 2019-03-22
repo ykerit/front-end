@@ -13,6 +13,7 @@ function ArticleList({ dispatch, articleList, total }) {
   return (
     <List
       style={{ padding: 6 }}
+      header={<div>所有文章</div>}
       itemLayout="vertical"
       pagination={{
         onChange: (page) => {

@@ -1,8 +1,10 @@
 import {login, queryUser, createRole, queryRole,
-  queryAdmin, createAdmin, createUser, delUser, delAdmin, delRole, register, UploadImage} from '../services/auth';
+  queryAdmin, createAdmin, createUser, delUser,
+  delAdmin, delRole, register, UploadImage,
+  queryUserInfo} from '../services/auth';
 import { routerRedux } from 'dva/router';
 import { message } from 'antd'
-import { setlocalStorage, dellocalStorage } from '../utils/helper';
+import { setlocalStorage, dellocalStorage, getlocalStorage } from '../utils/helper';
 
 message.config({
   top: 200,
@@ -13,10 +15,10 @@ export default {
   namespace: 'auth',
   state: {
     id: '',
+    name: '',
+    face: '',
     token: '',
     is_authorization: false,
-    image_url: '',
-    name: '',
     message: '',
     userData: [],
     roleData: [],
@@ -27,6 +29,8 @@ export default {
   reducers: {
     loginSuccess(state, action) {
       setlocalStorage('id', action.payload.id);
+      setlocalStorage('token', action.payload.token);
+      setlocalStorage('name', action.payload.name);
       return { ...state, ...action.payload, message: '登录成功' };
     },
     loginErro(state, action) {
@@ -40,16 +44,14 @@ export default {
     querySuccess(state, action){
       return { ...state, ...action.payload}
     },
-    queryImage(state, action){
-      return {image_url: action.payload}
+    queryUserSuccess(state, action){
+      return { ...state, ...action.payload}
     }
   },
   effects: {
     *login({ payload }, {call, put}) {
       const data = yield call(login, payload);
       if (data && data.status === 200) {
-        setlocalStorage('token', data.token);
-        setlocalStorage('name', data.name);
         yield put({
           type:'loginSuccess',
           payload: data
@@ -73,8 +75,6 @@ export default {
     *register({ payload }, {call, put}){
       const data = yield call(register, payload);
       if (data && data.status === 200) {
-        setlocalStorage('token', data.token);
-        setlocalStorage('name', data.name);
         yield put({
           type:'loginSuccess',
           payload: data
@@ -88,7 +88,6 @@ export default {
     },
     *queryUsers({ payload },{call, put}){
       const data = yield call(queryUser, payload);
-      console.log(data);
       if (data && data.status === 200) {
         yield put({
           type: 'querySuccess',
@@ -107,7 +106,6 @@ export default {
     },
     *queryAdmins({ payload }, {call, put}){
       const data = yield call(queryAdmin, payload);
-      console.log(data);
       if (data && data.status === 200){
         yield put({
           type: 'querySuccess',
@@ -173,8 +171,17 @@ export default {
       const data = yield call(UploadImage, payload);
       if (data && data.status === 200){
         yield put({
-          type: 'queryImage',
-          payload: data.image_url
+          type: 'queryUserInfo',
+          payload: getlocalStorage('id')
+        })
+      }
+    },
+    *queryUserInfo({ payload }, {call, put }) {
+      const data = yield call(queryUserInfo, payload);
+      if (data && data.status === 200) {
+        yield put({
+          type: 'queryUserSuccess',
+          payload: data
         })
       }
     }

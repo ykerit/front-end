@@ -6,7 +6,7 @@ class ArticleEdit extends Component{
   render(){
     const { receiveTag, receiveKind,
       releaseArticle, receiveTitle, backAdmin,
-      visible, onCancel, onOpen } = this.props;
+      visible, onCancel, onOpen, classification } = this.props;
     return (
       <Row>
         <Row>
@@ -34,6 +34,7 @@ class ArticleEdit extends Component{
         {this.props.children}
         <Row>
           <NewModal
+            classification={classification}
             visible={visible}
             onOk={releaseArticle}
             receiveTag={receiveTag}

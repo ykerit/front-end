@@ -17,7 +17,7 @@ class ArticeManage extends Component{
 
   render(){
     return (
-      <div style={{ background: '#ECECEC', padding: '10px', height: 700 }}>
+      <div style={{ padding: '10px', height: '100%' }}>
         <Row>
           <Row>
             <Button

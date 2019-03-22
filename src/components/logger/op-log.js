@@ -3,6 +3,9 @@ import { connect } from 'dva';
 import { Table } from 'antd';
 
 class OpLog extends Component{
+  state = {
+    current: null
+  };
 
   handleDelete = (key, dispatch) => {
     dispatch({
@@ -51,11 +54,13 @@ class OpLog extends Component{
           dataSource={OpLog}
           pagination={{
             onChange: (page) => {
+              this.setState({current: page});
               dispatch({
                 type: 'admin/queryLog',
                 payload: {type: 'opLog', pageSize: page},
               })
             },
+            current: this.state.current,
             total: op_total,
             pageSize: 10,
           }}

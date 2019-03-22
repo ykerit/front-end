@@ -4,6 +4,10 @@ import { Table } from 'antd';
 
 class UserLog extends Component{
 
+  state = {
+    current: null
+  };
+
   handleDelete = (key, dispatch) => {
     dispatch({
       type: 'auth/delAdmin',
@@ -47,11 +51,13 @@ class UserLog extends Component{
           dataSource={UserLog}
           pagination={{
             onChange: (page) => {
+              this.setState({current: page});
               dispatch({
                 type: 'admin/queryLog',
                 payload: {type: 'userLog', pageSize: page},
               })
             },
+            current: this.state.current,
             total: userLog_total,
             pageSize: 10,
           }}

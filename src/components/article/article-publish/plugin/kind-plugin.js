@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
-import { Checkbox, Row, Col, Input, Tag, Icon, Tooltip  } from 'antd';
+import { Radio, Row, Col, Input, Tag, Icon, Tooltip  } from 'antd';
 
 
 class KindPlugin extends Component{
 
   state = {
-    tags: [],
+    kinds: [],
     inputVisible: false,
     inputValue: '',
   };
 
   handleClose = (removedTag) => {
-    const tags = this.state.tags.filter(tag => tag !== removedTag);
-    this.setState({ tags });
+    const kinds = this.state.kinds.filter(tag => tag !== removedTag);
+    this.setState({ kinds });
   };
 
   showInput = () => {
@@ -26,16 +26,16 @@ class KindPlugin extends Component{
   handleInputConfirm = () => {
     const state = this.state;
     const inputValue = state.inputValue;
-    let tags = state.tags;
-    if (inputValue && tags.indexOf(inputValue) === -1) {
-      tags = [...tags, inputValue];
+    let kinds = state.kinds;
+    if (inputValue && kinds.indexOf(inputValue) === -1) {
+      kinds = [...kinds, inputValue];
     }
-    if (tags.length > 0) {
-      this.props.receiveKind(tags);
+    if (kinds.length > 0) {
+      this.props.receiveKind(kinds);
     }
-    console.log(tags);
+    console.log(kinds);
     this.setState({
-      tags,
+      kinds,
       inputVisible: false,
       inputValue: '',
     });
@@ -44,14 +44,21 @@ class KindPlugin extends Component{
   saveInputRef = input => this.input = input;
 
   onChange = checkedValues => {
-    this.props.receiveKind(checkedValues)
+    this.props.receiveKind(checkedValues.target.value)
   };
 
+  renderClassification = data => data.map((item, index) => {
+    return (
+      <Col span={8} key={index}><Radio value={item.id}>{item.name}</Radio></Col>
+    );
+  });
+
   render(){
-    const { tags, inputVisible, inputValue } = this.state;
+    const { kinds, inputVisible, inputValue } = this.state;
+    const { classification } = this.props;
     return (
       <div>
-        个人分类： {tags.map((tag, index) => {
+        个人分类： {kinds.map((tag, index) => {
         const isLongTag = tag.length > 20;
         const tagElem = (
           <Tag key={tag} closable={index !== 0} afterClose={() => this.handleClose(tag)}>
@@ -81,15 +88,11 @@ class KindPlugin extends Component{
           </Tag>
         )}
       <div style={{ background: '#ECECEC', padding: '10px', marginTop: '5px' }}>
-        <Checkbox.Group style={{ width: '90%' }} onChange={this.onChange}>
+        <Radio.Group style={{ width: '90%' }} onChange={this.onChange}>
           <Row>
-            <Col span={8}><Checkbox value="A">A</Checkbox></Col>
-            <Col span={8}><Checkbox value="B">B</Checkbox></Col>
-            <Col span={8}><Checkbox value="C">C</Checkbox></Col>
-            <Col span={8}><Checkbox value="D">D</Checkbox></Col>
-            <Col span={8}><Checkbox value="E">E</Checkbox></Col>
+            {this.renderClassification(classification)}
           </Row>
-        </Checkbox.Group>
+        </Radio.Group>
       </div>
       </div>
     );

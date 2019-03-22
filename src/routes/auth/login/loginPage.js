@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import LoginForm from './login';
-import Header from '../../../components/stand-component/header'
+import CommonFrame from '../../../layout/common/common-frame'
 import style from "./login.css";
 
 
@@ -13,15 +13,9 @@ function LoginPage({dispatch}) {
       })
     }
     return (
-      <div className={style.content}>
-        <Header/>
-        <div className={style.formContent}>
-          <div className={style.form}>
-            <LoginForm onOk={ login }/>
-          </div>
-        </div>
-        <div className={style.footer}>Blog ©2018 Created by yker</div>
-      </div>
+      <CommonFrame ourStyle={style.content}>
+        <LoginForm onOk={ login }/>
+      </CommonFrame>
     );
 }
 

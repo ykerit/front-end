@@ -1,15 +1,7 @@
-
 .content{
   margin-top: 2px;
   display: -webkit-flex;
   width: 70%;
-  justify-content: center;
   background-color: #FFFFFF;
   margin-left: 15%;
-}
-
-.center {
-  width: 100%;
-  padding-left: 10px;
-  padding-right: 10px;
 }

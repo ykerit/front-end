@@ -68,6 +68,12 @@ export function delAdmin(id) {
   })
 }
 
+export function queryUserInfo(id) {
+  return request(`user/${id}`, {
+    method: 'GET',
+  })
+}
+
 export function login(values){
   let formData = new FormData();
   formData.append('name', values.userName);

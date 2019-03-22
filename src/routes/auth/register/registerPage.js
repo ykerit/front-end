@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import RegistrationForm from './register';
+import CommonFrame from '../../../layout/common/common-frame'
 import style from './register.css';
 
 
@@ -12,14 +13,9 @@ function RegisterPage({dispatch}) {
     })
   }
   return (
-    <div className={style.content}>
-      <div className={style.formContent}>
-        <div className={style.form}>
-          <RegistrationForm onOk={ register } />
-        </div>
-      </div>
-      <div className={style.footer}>Blog ©2018 Created by yker</div>
-    </div>
+    <CommonFrame ourStyle={style.content}>
+      <RegistrationForm onOk={ register } />
+    </CommonFrame>
   );
 }
 

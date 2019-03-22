@@ -8,7 +8,7 @@ const Option = Select.Option;
 class NewModal extends Component{
 
   render(){
-    const { onOk, onCancel, visible, receiveTag, receiveKind } = this.props;
+    const { onOk, onCancel, visible, receiveTag, receiveKind, classification } = this.props;
 
     return (
       <Modal
@@ -25,7 +25,7 @@ class NewModal extends Component{
             <TagPlugin receiveTag={receiveTag}/>
           </FormItem>
           <FormItem>
-            <KindPlugin receiveKind={receiveKind}/>
+            <KindPlugin receiveKind={receiveKind} classification={classification}/>
           </FormItem>
           <FormItem>
             文章类型：

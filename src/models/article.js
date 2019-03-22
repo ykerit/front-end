@@ -1,4 +1,5 @@
-import {createArticle, queryAllArticle, queryArticle, createComment, queryComment} from "../services/article";
+import {createArticle, queryAllArticle, queryArticle,
+  createComment, queryComment, queryTimeLine} from "../services/article";
 
 export default {
   namespace: 'article',
@@ -6,6 +7,7 @@ export default {
     articleList: [],
     articleContent: [],
     comment: [],
+    timeline: [],
     total: null,
     comment_total: null,
   },
@@ -36,6 +38,15 @@ export default {
     *queryComment({ payload }, {call, put}){
       const data = yield call(queryComment, payload);
       if (data && data.status === 200){
+        yield put({
+          type: 'querySuccess',
+          payload:data
+        })
+      }
+    },
+    *queryTimeLine({ payload }, {call, put}) {
+      const data = yield call(queryTimeLine, payload);
+      if (data && data.status === 200) {
         yield put({
           type: 'querySuccess',
           payload:data

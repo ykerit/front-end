@@ -31,3 +31,7 @@ export function queryAllArticle(page_size) {
 export async function queryComment(value) {
   return request(`comment?article=${value.article}&page_size=${value.page_size}`)
 }
+
+export function queryTimeLine() {
+  return request('filed')
+}

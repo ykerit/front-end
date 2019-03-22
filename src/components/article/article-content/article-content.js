@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Calendar, message } from 'antd';
-import Header from '../../stand-component/header';
+import { message } from 'antd';
 import Comments from '../../stand-component/comment';
+import ArticleInfo from '../../stand-component/article-info';
+import CommonFrame from '../../../layout/common/common-frame';
 import { getlocalStorage } from '../../../utils/helper';
 import styles from './article-content.css';
 
@@ -20,7 +21,7 @@ class ArticleContent extends Component{
     };
   }
   componentDidMount(){
-    document.getElementById('content').style.minHeight= (window.screen.availHeight - 180) + 'px';
+    document.getElementById('content').style.minHeight= (window.screen.availHeight - 150) + 'px';
     this.props.dispatch({
       type: 'article/queryComment',
       payload: {article: this.state.page, page_size: 1 },
@@ -29,11 +30,15 @@ class ArticleContent extends Component{
   handlerSubmit = () => {
     const id = this.props.id === '' ? getlocalStorage('id') : this.props.id;
     if (this.state.value !== '') {
-      this.props.dispatch({
-        type: 'article/createComment',
-        payload: {id: id, content: this.state.value, article_id: this.state.page},
-      });
-      this.setState({value: ''});
+      if (this.state.value.length <= 150) {
+        this.props.dispatch({
+          type: 'article/createComment',
+          payload: {id: id, content: this.state.value, article_id: this.state.page},
+        });
+        this.setState({value: ''});
+      }  else {
+        message.warning('输入字数大于150');
+      }
     } else {
       message.warning('输入框不能为空');
     }
@@ -49,19 +54,20 @@ class ArticleContent extends Component{
     const data = {...articleContent[0]};
 
     return (
-      <div style={{height: '100%'}}>
-        <Header/>
+      <CommonFrame>
         <div id="content" className={styles.content}>
           <div className={styles.another}> </div>
           <div className={styles.middle}>
-            <div dangerouslySetInnerHTML={{__html: data.preview}}>
+            <div className={styles.title}>
+              <h1>{data.title}</h1>
+            </div>
+            <div>
+              <ArticleInfo face={data.face} time={data.create_time} star="0" name={data.name}/>
+            </div>
+            <div dangerouslySetInnerHTML={{__html: data.preview}} className={styles.htmlCon}>
             </div>
           </div>
-          <div className={styles.other}>
-            <div style={{width: 300, border: '1px solid #d9d9d9', borderRadius: 4, justifyContent: 'center'}}>
-              <Calendar fullscreen={false}/>
-            </div>
-          </div>
+          <div className={styles.other}> </div>
         </div>
         <div className={styles.comment}>
           <Comments
@@ -73,10 +79,7 @@ class ArticleContent extends Component{
             comment_total={comment_total}
             onChange={this.handlerChange}/>
         </div>
-        <div className={styles.footer}>
-          <span>Blog ©2018 Created by yker</span>
-        </div>
-      </div>
+      </CommonFrame>
     );
   }
 }

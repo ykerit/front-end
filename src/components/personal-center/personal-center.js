@@ -12,7 +12,7 @@ class PersonalCenter extends Component{
   };
 
   render(){
-    const { image_url, name } = this.props;
+    const { face, name } = this.props;
     const data = [
       {
         title: 'Ant Design Title 1',
@@ -28,7 +28,7 @@ class PersonalCenter extends Component{
       },
     ];
     return (
-      <div style={{ background: '#ECECEC', padding: '30px', height: 700 }}>
+      <div style={{ background: '#ECECEC', padding: '30px', height: '100%' }}>
         <Row gutter={16}>
           <Col span={6}>
             <Card>
@@ -92,7 +92,7 @@ class PersonalCenter extends Component{
                 </Tooltip>]}
             >
               <Meta
-                avatar={<Avatar src={image_url} size="large"/>}
+                avatar={<Avatar src={face} size="large"/>}
                 title={name}
                 description="签名"
               />
@@ -184,9 +184,9 @@ class PersonalCenter extends Component{
   }
 }
 function mapStateToProps(state) {
-  const { image_url, name } = state.auth;
+  const { face, name } = state.auth;
   return {
-    image_url,
+    face,
     name
   };
 }

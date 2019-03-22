@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import { connect } from 'dva';
-import { Table, Popconfirm, Button, Row } from 'antd';
+import { Table, Popconfirm, Button } from 'antd';
 import ModalForm from '../stand-component/modal-form';
+import TableFrame from '../../layout/table-frame/table-frame';
 
 class UserManage extends  Component{
   state = {
     visible: false,
+    current: null,
   };
 
   componentDidMount(){
@@ -85,37 +87,33 @@ class UserManage extends  Component{
     const title = [{title: '姓名', en: 'name'}, {title: '密码', en: 'password'}];
 
     return (
-      <div style={{ background: '#ECECEC', padding: '20px', height: 700 }}>
-        <Row>
-          <Button type="primary" onClick={this.showModal} icon="usergroup-add">添加用户</Button>
-        </Row>
-        <Row style={{height: 20}}/>
-        <Row>
-          <ModalForm
-            visible={this.state.visible}
-            onCancel={this.handleCancel}
-            onCreate={() => {this.handleCreate(dispatch)}}
-            wrappedComponentRef={this.saveFormRef}
-            title="创建用户"
-            data={title}
-          />
-          <Table
-            rowKey={record => record.id}
-            columns={columns}
-            dataSource={userData}
-            pagination={{
-              onChange: (page) => {
-                dispatch({
-                  type: 'auth/queryUsers',
-                  payload: page,
-                })
-              },
-              total: user_total,
-              pageSize: 10,
-            }}
-          />
-        </Row>
-      </div>
+      <TableFrame text="添加用户" showModal={this.showModal}>
+        <ModalForm
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={() => {this.handleCreate(dispatch)}}
+          wrappedComponentRef={this.saveFormRef}
+          title="创建用户"
+          data={title}
+        />
+        <Table
+          rowKey={record => record.id}
+          columns={columns}
+          dataSource={userData}
+          pagination={{
+            onChange: (page) => {
+              this.setState({current: page});
+              dispatch({
+                type: 'auth/queryUsers',
+                payload: page,
+              })
+            },
+            current: this.state.current,
+            total: user_total,
+            pageSize: 10,
+          }}
+        />
+      </TableFrame>
     );
 }
 

@@ -11,21 +11,21 @@ export default {
   namespace: 'admin',
   state: {
     AdminLog: [],
-    OpLog: [],
-    UserLog: [],
-    tag: [],
-    kind: [],
-    permission: [],
-    userLog_total: null,
-    op_total: null,
     adminLog_total: null,
-    kind_total: null,
+    OpLog: [],
+    op_total: null,
+    UserLog: [],
+    userLog_total: null,
+    tag: [],
     tag_total: null,
+    kind: [],
+    kind_total: null,
+    permission: [],
     permission_total: null,
   },
   reducers: {
     querySuccess(state, action){
-      return { ...state, ...action.payload}
+      return { ...state, ...action.payload};
     },
   },
   effects: {

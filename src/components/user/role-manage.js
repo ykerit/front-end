@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Table, Popconfirm, Button, Row } from 'antd';
+import { Table, Popconfirm, Button } from 'antd';
 import ModalForm from '../stand-component/modal-form';
+import TableFrame from '../../layout/table-frame/table-frame';
 
 class RoleManage extends Component{
 
@@ -88,26 +89,20 @@ class RoleManage extends Component{
     // 关于为啥需要在这里dispatch 是因为各个modal需要不同的dispatch， 在handleCreate函数中 不能直接传入参数
     // 所以需要 使用箭头函数 来传入dispatch参数 因为dispatch函数是由props父组件属性携带的
     return (
-      <div style={{ background: '#ECECEC', padding: '20px', height: 700 }}>
-        <Row>
-          <Button type="primary" icon="plus" onClick={this.showModal}>添加角色</Button>
-        </Row>
-        <Row style={{height: 20}}/>
-        <Row>
-          <ModalForm
-            visible={this.state.visible}
-            onCancel={this.handleCancel}
-            onCreate={() => {this.handleCreate(dispatch)}}
-            wrappedComponentRef={this.saveFormRef}
-            title="创建角色"
-            data={title}
-          />
-          <Table
-            rowKey={record => record.id}
-            columns={columns}
-            dataSource={roleData}/>
-        </Row>
-      </div>
+      <TableFrame text="添加角色" showModal={this.showModal}>
+        <ModalForm
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={() => {this.handleCreate(dispatch)}}
+          wrappedComponentRef={this.saveFormRef}
+          title="创建角色"
+          data={title}
+        />
+        <Table
+          rowKey={record => record.id}
+          columns={columns}
+          dataSource={roleData}/>
+      </TableFrame>
     );
   }
 }

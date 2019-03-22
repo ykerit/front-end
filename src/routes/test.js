@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import Frame from '../layout/frame/frame'
+import CommonFrame from '../layout/common/common-frame'
 
 class Test extends Component {
   render(){
+
     return (
       <div>
-        <Frame/>
+        <CommonFrame>
+
+        </CommonFrame>
       </div>
     );
   }

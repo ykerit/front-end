@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Table, Popconfirm, Button, Row } from 'antd';
+import { Table, Popconfirm, Button } from 'antd';
 import ModalForm from '../stand-component/modal-form';
+import TableFrame from '../../layout/table-frame/table-frame';
 
 class AdminManage extends Component{
 
   state = {
     visible: false,
+    current: null,
   };
 
   componentDidMount(){
@@ -91,37 +93,33 @@ class AdminManage extends Component{
     const title = [{title: '姓名', en: 'name'}, {title: '密码', en: 'password'}];
 
     return (
-      <div style={{ background: '#ECECEC', padding: '20px', height: 700 }}>
-        <Row>
-          <Button type="primary" icon="user-add" onClick={this.showModal}>添加管理员</Button>
-        </Row>
-        <Row style={{height: 20}}/>
-        <Row>
-          <ModalForm
-            visible={this.state.visible}
-            onCancel={this.handleCancel}
-            onCreate={() => {this.handleCreate(dispatch)}}
-            wrappedComponentRef={this.saveFormRef}
-            title="创建管理员"
-            data={title}
-          />
-          <Table
-            rowKey={record => record.id}
-            columns={columns}
-            dataSource={adminData}
-            pagination={{
-              onChange: (page) => {
-                dispatch({
-                  type: 'auth/queryAdmins',
-                  payload: page,
-                })
-              },
-              total: admin_total,
-              pageSize: 10,
-            }}
-          />
-        </Row>
-      </div>
+      <TableFrame text="添加管理员" showModal={this.showModal}>
+        <ModalForm
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={() => {this.handleCreate(dispatch)}}
+          wrappedComponentRef={this.saveFormRef}
+          title="创建管理员"
+          data={title}
+        />
+        <Table
+          rowKey={record => record.id}
+          columns={columns}
+          dataSource={adminData}
+          pagination={{
+            onChange: (page) => {
+              this.setState({current: page});
+              dispatch({
+                type: 'auth/queryAdmins',
+                payload: page,
+              })
+            },
+            current: this.state.current,
+            total: admin_total,
+            pageSize: 10,
+          }}
+        />
+      </TableFrame>
     );
   }
 }

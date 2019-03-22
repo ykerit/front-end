@@ -64,8 +64,8 @@ export default class Frame extends Component{
               style={{
                 padding: 24,
                 background: '#fff',
-                minHeight: 700,
-                borderRadius: 5
+                borderRadius: 5,
+                height: '100%'
               }}>
               {this._renderContent()}
             </div>
