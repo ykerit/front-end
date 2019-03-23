@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import {
   Menu, Icon
 } from 'antd';
+import { connect } from 'dva';
 const SubMenu = Menu.SubMenu;
 
-export default class Menus extends Component{
+class Menus extends Component{
 
-  menuSource = [{
+  menuSourceByadmin = [{
     key: 'personal-center',
     type: 'user',
     name: '个人中心',
@@ -67,6 +68,28 @@ export default class Menus extends Component{
     child: null
   }];
 
+  menuSourceByUser = [{
+    key: 'personal-center',
+    type: 'user',
+    name: '个人中心',
+    child: null
+  },{
+    key: 'article',
+    type: 'profile',
+    name: '文章管理',
+    child: null
+  },{
+    key: 'kind',
+    type: 'database',
+    name: '分类管理',
+    child: null
+  },{
+    key: 'user-analysis',
+    type: 'bar-chart',
+    name: '用户分析',
+    child: null
+  }];
+
   _renderChild = (child) => {
     let temp = [];
     for (let item of child){
@@ -81,7 +104,13 @@ export default class Menus extends Component{
   };
   renderItem = () =>{
     let temp = [];
-    for (let item of this.menuSource){
+    let data;
+    if (this.props.role === 1) {
+      data = this.menuSourceByadmin;
+    } else {
+      data = this.menuSourceByUser;
+    }
+    for (let item of data){
       if (item.child === null){
         temp.push(
           <Menu.Item key={item.key}>
@@ -114,3 +143,11 @@ export default class Menus extends Component{
     );
   }
 }
+function mapStateToProps(state) {
+  const { role } = state.auth;
+  return {
+    role
+  };
+}
+
+export default connect(mapStateToProps)(Menus);

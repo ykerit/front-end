@@ -3,7 +3,7 @@ import {login, queryUser, createRole, queryRole,
   delAdmin, delRole, register, UploadImage,
   queryUserInfo} from '../services/auth';
 import { routerRedux } from 'dva/router';
-import { message } from 'antd'
+import { message, notification, Icon } from 'antd'
 import { setlocalStorage, dellocalStorage, getlocalStorage } from '../utils/helper';
 
 message.config({
@@ -18,6 +18,7 @@ export default {
     name: '',
     face: '',
     token: '',
+    role: '',
     is_authorization: false,
     message: '',
     userData: [],
@@ -34,7 +35,7 @@ export default {
       return { ...state, ...action.payload, message: '登录成功' };
     },
     loginErro(state, action) {
-      return { ...state, ...action.payload, message: '登录失败'}
+      return { ...state, is_authorization: false, message: '登录失败'}
     },
     logoutSuccess(state){
       return { ...state, id:'', name: '',
@@ -183,6 +184,19 @@ export default {
           type: 'queryUserSuccess',
           payload: data
         })
+      }else {
+        yield put({
+          type: 'loginErro'
+        });
+        const args = {
+          message: '登出通知',
+          description: '登录信息已经过期啦，请及时登录， 解锁更多姿势!',
+          icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
+        };
+        yield notification.open(args);
+        yield put(routerRedux.push('/blank'));
+        yield put(routerRedux.push('/'));
+        dellocalStorage();
       }
     }
   },

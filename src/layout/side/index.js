@@ -12,7 +12,6 @@ export default class Side extends Component{
   };
 
   onCollapse = (collapsed) => {
-    console.log(collapsed);
     this.setState({ collapsed });
   };
   render(){

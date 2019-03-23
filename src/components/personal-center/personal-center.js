@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Statistic, Card, Row, Col, Icon,
-  Avatar, List, Button, Popconfirm, Tooltip } from 'antd';
+  Avatar,Tooltip } from 'antd';
 import AvatarChange from '../stand-component/avatar-change';
 import { connect } from 'dva';
+import RelationList from '../stand-component/relation-list'
 const { Meta } = Card;
 
 class PersonalCenter extends Component{
@@ -15,17 +16,17 @@ class PersonalCenter extends Component{
     const { face, name } = this.props;
     const data = [
       {
-        title: 'Ant Design Title 1',
+        title: '不爱静香的哆啦A梦',
       },
       {
-        title: 'Ant Design Title 2',
+        title: '半夜钓鱼的小明',
       },
       {
-        title: 'Ant Design Title 3',
+        title: '锡纸烫的村口大爷',
       },
       {
-        title: 'Ant Design Title 4',
-      },
+        title: '走中路的打野',
+      }
     ];
     return (
       <div style={{ background: '#ECECEC', padding: '30px', height: '100%' }}>
@@ -75,7 +76,7 @@ class PersonalCenter extends Component{
         <Row gutter={16}>
           <Col span={6}>
             <Card
-              style={{ width: 420 }}
+              style={{ height: 380 }}
               cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
               actions={[
                 <Tooltip
@@ -105,78 +106,13 @@ class PersonalCenter extends Component{
             />
           </Col>
           <Col span={6}>
-            <Card
-              title="我的关注"
-              bordered={false}>
-              <List
-                itemLayout="horizontal"
-                dataSource={data}
-                renderItem={item => (
-                  <List.Item actions={[
-                    <span>
-                      <Popconfirm title="确认删除吗?" okText="是" cancelText="否">
-                        <Button type="danger">删除</Button>
-                      </Popconfirm>
-                    </span>]}>
-                    <List.Item.Meta
-                      avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                      title={<a href="https://ant.design">{item.title}</a>}
-                      description="Ant Design Team"
-                    />
-                  </List.Item>
-                )}
-              />
-            </Card>
+            <RelationList title="我的关注" data={data} url="https://s2.ax1x.com/2019/03/21/A3Z2pn.jpg"/>
           </Col>
           <Col span={6}>
-            <Card
-              title="我的收藏"
-              bordered={false}>
-              <List
-                itemLayout="horizontal"
-                dataSource={data}
-                renderItem={item => (
-                  <List.Item actions={[
-                    <span>
-                      <Popconfirm title="确认删除吗?" okText="是" cancelText="否">
-                        <Button type="danger">删除</Button>
-                      </Popconfirm>
-                    </span>
-                  ]}>
-                    <List.Item.Meta
-                      avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                      title={<a href="https://ant.design">{item.title}</a>}
-                      description="Ant Design Team"
-                    />
-                  </List.Item>
-                )}
-              />
-            </Card>
+            <RelationList title="我的收藏" data={data} url="https://s2.ax1x.com/2019/03/21/A3Z2pn.jpg"/>
           </Col>
           <Col span={6}>
-            <Card
-              title="我的粉丝"
-              bordered={false}>
-              <List
-                itemLayout="horizontal"
-                dataSource={data}
-                renderItem={item => (
-                  <List.Item actions={[
-                    <span>
-                      <Popconfirm title="确认删除吗?" okText="是" cancelText="否">
-                        <Button type="danger">删除</Button>
-                      </Popconfirm>
-                    </span>
-                  ]}>
-                    <List.Item.Meta
-                      avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                      title={<a href="https://ant.design">{item.title}</a>}
-                      description="Ant Design Team"
-                    />
-                  </List.Item>
-                )}
-              />
-            </Card>
+            <RelationList title="我的粉丝" data={data} url="https://s2.ax1x.com/2019/03/21/A3Z2pn.jpg"/>
           </Col>
         </Row>
       </div>

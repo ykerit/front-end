@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { message } from 'antd';
+import { message, BackTop } from 'antd';
 import Comments from '../../stand-component/comment';
 import ArticleInfo from '../../stand-component/article-info';
 import CommonFrame from '../../../layout/common/common-frame';
@@ -78,6 +78,9 @@ class ArticleContent extends Component{
             page={this.state.page}
             comment_total={comment_total}
             onChange={this.handlerChange}/>
+        </div>
+        <div>
+          <BackTop />
         </div>
       </CommonFrame>
     );

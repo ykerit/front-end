@@ -25,7 +25,7 @@
 }
 
 .htmlCon{
-  height: 95%;
+  min-height: 95%;
 }
 .comment{
   display: -webkit-flex;

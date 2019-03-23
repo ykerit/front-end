@@ -12,7 +12,6 @@ import Tags from './routes/tags/tag-page'
 import About from './routes/about/about-page'
 import ArticleContent from './components/article/article-content/article-content';
 
-import Test from './routes/test'
 
 function RouterConfig({ history }) {
   return (
@@ -28,7 +27,6 @@ function RouterConfig({ history }) {
         <Route path="/tags" exact component={Tags}/>
         <Route path="/about" exact component={About}/>
         <AuthorizedRoute path="/mdeditor" exact component={MdeEditorPage}/>
-        <Route path="/test" exact component={Test}/>
       </Switch>
     </Router>
   );

@@ -3,6 +3,7 @@ import {connect} from 'dva';
 import { Icon, Menu } from 'antd';
 import { Link } from 'dva/router';
 import Logo from '../../layout/header/logo/logo';
+import {getlocalStorage} from '../../utils/helper';
 
 const SubMenu = Menu.SubMenu;
 
@@ -12,8 +13,7 @@ class Header extends Component{
   };
 
   componentDidMount() {
-    if (this.props.is_authorization ) {
-      console.log('hh');
+    if (this.props.is_authorization || getlocalStorage('id')) {
       this.setState({show: false})
     } else {
       this.setState({show: true})
