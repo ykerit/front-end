@@ -1,6 +1,13 @@
-.container{
-  margin-left: 75%;
+.content {
+  display: -webkit-flex;
+  justify-content: flex-start;
+  align-items: center;
 }
-.container span {
-  margin-left: 10px;
+
+.news {
+  margin:2px 40px 0 0;
+  cursor: pointer;
+}
+.dropDown {
+  margin-right: 15px;
 }

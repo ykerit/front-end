@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table } from 'antd';
+import TableFrame from '../../layout/table-frame/table-frame';
 
 class UserLog extends Component{
 
@@ -44,7 +45,7 @@ class UserLog extends Component{
     }];
 
     return (
-      <div>
+      <TableFrame>
         <Table
           rowKey={record => record.id}
           columns={columns}
@@ -62,7 +63,7 @@ class UserLog extends Component{
             pageSize: 10,
           }}
         />
-      </div>
+      </TableFrame>
     );
   }
 }

@@ -1,0 +1,33 @@
+.card {
+  height: 380px;
+  overflow: auto;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  margin-bottom:25px;
+  line-height: 18px;
+  font-size: 16px;
+}
+
+.avatarContent {
+  width: 100%;
+  display: -webkit-flex;
+  justify-content: center;
+}
+.avatarStyle {
+  width: 80px;
+  height: 80px;
+}
+.name {
+  display: -webkit-flex;
+  justify-content: center;
+  padding: 20px;
+  line-height: 18px;
+  font-size: 20px;
+}
+.describe{
+  display: -webkit-flex;
+  justify-content: center;
+  padding: 20px;
+}

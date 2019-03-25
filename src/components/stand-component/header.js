@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'dva';
 import { Icon, Menu } from 'antd';
 import { Link } from 'dva/router';
-import Logo from '../../layout/header/logo/logo';
+import Logo from '../../layout/side/logo/logo';
 import {getlocalStorage} from '../../utils/helper';
 
 const SubMenu = Menu.SubMenu;

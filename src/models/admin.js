@@ -22,11 +22,15 @@ export default {
     kind_total: null,
     permission: [],
     permission_total: null,
+    collapse: false,
   },
   reducers: {
     querySuccess(state, action){
       return { ...state, ...action.payload};
     },
+    toggle(state, { payload }) {
+      return {...state, collapse: payload}
+    }
   },
   effects: {
     *queryLog({ payload }, {call, put}){

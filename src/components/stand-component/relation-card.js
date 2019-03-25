@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, List, Popconfirm, Button, Avatar } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
-import styles from './relation-list.css';
+import styles from './relation-card.css';
 
-export default function RelationList({ data, title, url}) {
+export default function RelationCard({ data, title, url}) {
   return (
     <Card
       className={styles.list}
@@ -28,6 +28,7 @@ export default function RelationList({ data, title, url}) {
               </span>
             ]}>
               <List.Item.Meta
+                className={styles.text}
                 avatar={<Avatar src={url} />}
                 title={item.title}
               />

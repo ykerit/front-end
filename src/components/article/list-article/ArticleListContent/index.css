@@ -1,0 +1,17 @@
+.description {
+  max-width: 720px;
+  line-height: 22px;
+}
+.extra {
+  margin-top: 16px;
+  line-height: 22px;
+}
+
+.avatar {
+  position: relative;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: top;
+}

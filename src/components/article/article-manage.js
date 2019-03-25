@@ -17,7 +17,7 @@ class ArticeManage extends Component{
 
   render(){
     return (
-      <div style={{ padding: '10px', height: '100%' }}>
+      <div style={{ padding: '8px', height: '100%', backgroundColor: '#FFFFFF' }}>
         <Row>
           <Row>
             <Button
@@ -35,7 +35,6 @@ class ArticeManage extends Component{
       </div>
     );
   }
-
 }
 
 ArticeManage.propTypes = {

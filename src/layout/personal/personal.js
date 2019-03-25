@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
-import { Avatar, Icon, Badge} from 'antd';
+import { Avatar, Icon, Badge, Menu, Dropdown} from 'antd';
 import {connect} from 'dva'
-import style from './personal.css'
+import { routerRedux } from 'dva/router';
 import {getlocalStorage} from "../../utils/helper";
-import { Link } from 'dva/router';
+import style from './personal.css'
 
 function logout(dispatch) {
   dispatch({
     type: 'auth/logout'
   });
+}
+
+function backHome(dispatch) {
+  dispatch(routerRedux.push('/'))
 }
 
 function _renderName(name, is_authorization) {
@@ -29,20 +33,70 @@ class Personal extends Component{
       })
     }
   }
+
   render() {
     const { face, name, is_authorization, dispatch } = this.props;
+    const DropdownList = (
+      <Menu>
+        <Menu.Item key='user'>
+          <Icon type='user'/>
+          {_renderName(name, is_authorization)}
+        </Menu.Item>
+        <Menu.Item
+          key='home'
+          onClick={() => backHome(dispatch)}
+        >
+          <Icon type="home" />首页
+        </Menu.Item>
+        <Menu.Item
+          disabled
+          key='edit'
+        >
+          <Icon type='edit'/>
+          个人设置
+        </Menu.Item>
+        <Menu.Item
+          disabled
+          key='setting'
+        >
+          <Icon type='setting'/>
+          系统设置
+        </Menu.Item>
+        <Menu.Item
+          key='logout'
+          onClick={() => logout(dispatch)}
+        >
+          <Icon type='logout'/>
+          退出登录
+        </Menu.Item>
+      </Menu>
+    );
+
     return (
-      <div className={style.container}>
-        <Avatar size="large" icon="user" src={face}/>
-        <span>{_renderName(name, is_authorization)}</span>
-        <span><Icon type="bell" onClick={() => {}}/></span>
-        <span>
-          <Badge overflowCount={999}>
-          <Icon type="message"/>
+      <div className={style.content}>
+        <div className={style.news}>
+          <Badge count={6}>
+            <Icon
+              style={{fontSize:'20px'}}
+              type="bell"
+            />
           </Badge>
-        </span>
-        <span><Icon type="poweroff" onClick={() => logout(dispatch)}/></span>
-        <span><Link to="/"><Icon type="home" />首页</Link></span>
+        </div>
+        <div className={style.dropDown}>
+          <Dropdown
+            overlay={DropdownList}
+          >
+            <div>
+              <Avatar
+                size='large'
+                src={face}
+              />
+              <Icon style={{color:'rgba(0,0,0,.3)'}}
+                    type="caret-down"
+              />
+            </div>
+          </Dropdown>
+        </div>
       </div>
     );
   }
@@ -50,10 +104,12 @@ class Personal extends Component{
 
 function mapStateToProps(state) {
   const { name, is_authorization, face } = state.auth;
+  const { collapse } = state.admin;
   return {
     name,
     is_authorization,
-    face
+    face,
+    collapse
   };
 }
 

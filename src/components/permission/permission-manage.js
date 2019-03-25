@@ -104,7 +104,7 @@ class PermissionManage extends Component{
       {title: '方法', en: 'method'}];
 
     return (
-      <TableFrame text="添加权限" showModal={this.showModal}>
+      <TableFrame text="添加权限" showModal={this.showModal} isButton={true}>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}

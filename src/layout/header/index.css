@@ -1,16 +1,18 @@
 
 .header {
-  display: flex;
-  align-items: center;
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 50px;
-  padding-left: 0;
-  padding-right: 16px;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
-  width: 100%;
+  background-color: #fff;
+  padding: 0;
+  display: -webkit-flex;
+  justify-content: space-between;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+.trigger:hover {
+  color: #1890ff;
 }

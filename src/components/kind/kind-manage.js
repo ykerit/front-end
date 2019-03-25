@@ -91,7 +91,7 @@ class KindManage extends Component{
     const title = [{title: '分类名', en: 'name'}];
 
     return (
-      <TableFrame text="添加分类" showModal={this.showModal}>
+      <TableFrame text="添加分类" showModal={this.showModal} isButton={true}>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}

@@ -93,7 +93,7 @@ class AdminManage extends Component{
     const title = [{title: '姓名', en: 'name'}, {title: '密码', en: 'password'}];
 
     return (
-      <TableFrame text="添加管理员" showModal={this.showModal}>
+      <TableFrame text="添加管理员" showModal={this.showModal} isButton={true}>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}

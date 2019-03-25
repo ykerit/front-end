@@ -56,24 +56,22 @@ export default class Frame extends Component{
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <Headers/>
+        <Side selectedKey={this.selectedKey}/>
         <Layout>
-          <Side selectedKey={this.selectedKey}/>
-          <Content style={{ marginTop: '60px', marginLeft: '15px', marginRight: '15px' }}>
+          <Headers/>
+          <Content style={{ marginTop: '20px', marginLeft: '15px', marginRight: '15px' }}>
             <div
               style={{
                 padding: 24,
-                background: '#fff',
-                borderRadius: 5,
                 height: '100%'
               }}>
               {this._renderContent()}
             </div>
           </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            yker ©2019 Created by school
+          </Footer>
         </Layout>
-        <Footer style={{ textAlign: 'center' }}>
-          yker ©2019 Created by school
-        </Footer>
       </Layout>
     );
   }

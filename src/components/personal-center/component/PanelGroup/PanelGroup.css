@@ -1,0 +1,35 @@
+.content {
+  background-color: #fff;
+  text-align: center;
+  color: #000;
+  padding: 8px;
+  height: 108px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom:25px;
+}
+.iconWrap {
+  padding: 12px 14px;
+  margin-left: -20px;
+  transition: all 0.4s ease-out;
+  border-radius: 4px;
+}
+.text {
+  margin-bottom: 12px;
+  line-height: 18px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: bold;
+  text-align: left;
+}
+.num {
+  display: block;
+  font-weight: bold;
+  text-align: left;
+  font-size: 20px;
+  color: #666;
+}

@@ -1,19 +1,40 @@
 import React, {Component} from 'react';
-import { Layout } from 'antd';
-import Logo from './logo/logo'
+import { connect } from 'dva';
+import { Layout, Icon } from 'antd';
 import Personal from '../personal/personal'
 import style from './index.css'
 const { Header } = Layout;
 
 // 页眉
-export default class Headers extends Component{
+class Headers extends Component{
 
+  toggle = () => {
+    this.props.dispatch({
+      type: 'admin/toggle',
+      payload: !this.props.collapse
+    })
+  };
     render() {
       return (
         <Header className={style.header}>
-          <Logo/>
+          <Icon
+            className={style.trigger}
+            type={this.props.collapse? 'menu-unfold' : 'menu-fold'}
+            onClick={() => this.toggle()}
+          />
           <Personal/>
         </Header>
       );
   }
 }
+function mapStateToProps(state) {
+  const { role } = state.auth;
+  const { collapse } = state.admin;
+  return {
+    role,
+    collapse
+  };
+}
+
+export default connect(mapStateToProps)(Headers);
+

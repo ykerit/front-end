@@ -89,7 +89,7 @@ class RoleManage extends Component{
     // 关于为啥需要在这里dispatch 是因为各个modal需要不同的dispatch， 在handleCreate函数中 不能直接传入参数
     // 所以需要 使用箭头函数 来传入dispatch参数 因为dispatch函数是由props父组件属性携带的
     return (
-      <TableFrame text="添加角色" showModal={this.showModal}>
+      <TableFrame text="添加角色" showModal={this.showModal} isButton={true}>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}
