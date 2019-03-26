@@ -10,13 +10,18 @@ class ArticleEdit extends Component{
     return (
       <Row>
         <Row>
-          <Col span={20} style={{ paddingTop: 10 }}>
+          <Col
+            xl={20}
+            xs={16}
+            style={{ paddingTop: 10 }}>
             <Input
               placeholder="请输入标题"
               style={{ width: '100%', marginLeft: 5 }}
               onChange={e => receiveTitle(e.target.value) }/>
           </Col>
-          <Col span={2} style={{ paddingTop: 10 }}>
+          <Col
+            xl={2}
+            style={{ paddingTop: 10 }}>
             <Button
               style={{ marginLeft: 20 }}
               type="primary"
@@ -24,7 +29,9 @@ class ArticleEdit extends Component{
               发布文章
             </Button>
           </Col>
-          <Col span={2} style={{ paddingTop: 10 }}>
+          <Col
+            xl={2}
+            style={{ paddingTop: 10 }}>
             <Button type="primary" onClick={() => backAdmin()}>
               回到后台
             </Button>

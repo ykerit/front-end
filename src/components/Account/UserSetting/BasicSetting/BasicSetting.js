@@ -11,10 +11,10 @@ class BasicSetting extends Component {
   componentDidMount() {
     const { setFieldsValue } = this.props.form;
     const { data } = this.props;
-    setFieldsValue({['nickname']: data.name });
-    setFieldsValue({['signature']: data.signature });
-    setFieldsValue({['title']: data.title });
-    setFieldsValue({['group']: data.group });
+    setFieldsValue({'nickname': data.name });
+    setFieldsValue({'signature': data.signature });
+    setFieldsValue({'title': data.title });
+    setFieldsValue({'group': data.group });
   }
   handleSubmit = (e) => {
     e.preventDefault();

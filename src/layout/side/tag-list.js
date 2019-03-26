@@ -70,21 +70,6 @@ export const selectTagList = isAdmin => {
   }];
 
   const menuSourceByUser = [{
-    key: 'VisitorAnalysis',
-    type: 'bar-chart',
-    name: '访客分析',
-    child: null
-  },{
-    key: 'article',
-    type: 'profile',
-    name: '文章管理',
-    child: null
-  },{
-    key: 'kind',
-    type: 'database',
-    name: '分类管理',
-    child: null
-  },{
     key: 'Account',
     type: 'user',
     name: '个人',
@@ -97,6 +82,16 @@ export const selectTagList = isAdmin => {
       type: 'setting',
       name: '个人设置'
     }]
+  },{
+    key: 'VisitorAnalysis',
+    type: 'bar-chart',
+    name: '访客分析',
+    child: null
+  },{
+    key: 'kind',
+    type: 'database',
+    name: '分类管理',
+    child: null
   }];
   if (isAdmin === 1) {
     return menuSourceByadmin;
