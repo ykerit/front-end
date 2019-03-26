@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Button, Row } from 'antd';
 import { routerRedux} from 'dva/router';
-import ArticleList from './list-article/article-list';
+import ArticleList from './list-article/index';
+import TableFrame from '../../layout/table-frame/table-frame';
 
 class ArticeManage extends Component{
   state = {
-    display: false
+    display: false,
+    current_page: 1,
   };
   componentDidMount(){
     this.props.dispatch({
@@ -15,29 +16,37 @@ class ArticeManage extends Component{
     })
   };
 
+  loadingMoreArticle = () => {
+    this.props.dispatch({
+      type: 'article/appendArticle',
+      payload: this.state.current_page+1,
+    });
+    this.setState({current_page: this.state.current_page+1});
+  };
+
   render(){
+    const { articleList, total } = this.props;
     return (
-      <div style={{ padding: '8px', height: '100%', backgroundColor: '#FFFFFF' }}>
-        <Row>
-          <Row>
-            <Button
-              type="primary"
-              style={{ marginTop: 10, marginLeft: 20 }}
-              onClick={() => this.props.dispatch(routerRedux.push('/mdeditor'))}>
-              新建文章
-            </Button>
-          </Row>
-          <Row style={{height: 20}}/>
-          <Row>
-            <ArticleList/>
-          </Row>
-        </Row>
-      </div>
+      <TableFrame
+        text="新建文章"
+        showModal={() => this.props.dispatch(routerRedux.push('/mdeditor'))}
+        isButton={true}>
+        <ArticleList
+          title="所有文章"
+          list={articleList}
+          total={total}
+          loadingMoreArticle={this.loadingMoreArticle}
+        />
+      </TableFrame>
     );
   }
 }
+function mapStateToProps(state) {
+  const { articleList, total } = state.article;
+  return {
+    articleList,
+    total
+  };
+}
 
-ArticeManage.propTypes = {
-};
-
-export default connect()(ArticeManage);
+export default connect(mapStateToProps)(ArticeManage);

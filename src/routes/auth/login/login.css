@@ -1,16 +1,10 @@
-.content{
-  margin: 0;
-  padding: 0;
-  display: -webkit-flex;
-  background: url("../../../assets/login.jpg") no-repeat;
-  background-size:100% 100%;
-  align-items: center;
-  justify-content: center;
+.main {
+  width: 388px;
+  margin: 0 auto;
 }
-.formContent{
-  background-color: #F0F2F5;
-  border: #dde4ec;
-  border-radius: 5px;
-  width: 16%;
-  padding: 5px;
+
+@media screen and (max-width: 576px) {
+  w.main {
+    width: 95%;
+  }
 }

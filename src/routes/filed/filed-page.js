@@ -18,7 +18,7 @@ class FiledPage extends Component{
         <Card
           title={item.title}
           extra={<span>{item.create_time}</span>}
-          style={{ width: 450 }}
+          className={styles.card}
         >
           <p>{item.description}</p>
         </Card>
@@ -29,12 +29,12 @@ class FiledPage extends Component{
   render() {
     const { timeline } = this.props;
     return (
-      <CommonFrame ourStyle={styles.content}>
-        {timeline.length === 0 ? <Empty description="没有时间线哦！"/> :
-          (<Timeline style={{ marginTop: 10 }}>
-            {this.renderItem(timeline)}
-          </Timeline>)}
-
+      <CommonFrame>
+          {timeline.length === 0 ? <Empty description="没有时间线哦！"/> :
+            (<Timeline className={styles.timeLine}>
+              {this.renderItem(timeline)}
+            </Timeline>)
+          }
       </CommonFrame>
     );
   }

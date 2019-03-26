@@ -1,18 +1,10 @@
 import React from 'react'
 import {Row, Col} from 'antd'
-import RelationCard from '../../../stand-component/relation-card';
-import {UserCard} from '../UserCard/UserCard'
+import RelationCard from '../../../stand-component/relation-card/relation-card';
 
 export const CardPanel = props => {
   return (
     <Row gutter={12}>
-      <Col
-        lg={6}
-        md={12}
-        xs={24}
-      >
-        <UserCard {...props} />
-      </Col>
       <Col
         lg={6}
         md={12}

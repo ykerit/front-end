@@ -35,7 +35,7 @@ class Personal extends Component{
   }
 
   render() {
-    const { face, name, is_authorization, dispatch } = this.props;
+    const { face, name, is_authorization, dispatch, isMobile } = this.props;
     const DropdownList = (
       <Menu>
         <Menu.Item key='user'>
@@ -85,14 +85,16 @@ class Personal extends Component{
         <div className={style.dropDown}>
           <Dropdown
             overlay={DropdownList}
+            trigger={[isMobile ? 'click' : 'hover']}
           >
             <div>
               <Avatar
                 size='large'
                 src={face}
               />
-              <Icon style={{color:'rgba(0,0,0,.3)'}}
-                    type="caret-down"
+              <Icon
+                style={{color:'rgba(0,0,0,.3)'}}
+                type="caret-down"
               />
             </div>
           </Dropdown>
@@ -104,12 +106,13 @@ class Personal extends Component{
 
 function mapStateToProps(state) {
   const { name, is_authorization, face } = state.auth;
-  const { collapse } = state.admin;
+  const { collapse, isMobile } = state.admin;
   return {
     name,
     is_authorization,
     face,
-    collapse
+    collapse,
+    isMobile
   };
 }
 

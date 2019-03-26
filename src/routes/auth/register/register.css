@@ -1,18 +1,41 @@
-.content{
-  margin: 0;
-  padding: 0;
-  display: -webkit-flex;
-  background: url("../../../assets/register.jpg") no-repeat;
-  background-size:100% 100%;
-  align-items: center;
-  justify-content: center;
+.main {
+  width: 388px;
+  margin: 0 auto;
 }
-.formContent{
-  display: -webkit-flex;
-  background-color: #F0F2F5;
-  border: #dde4ec;
-  border-radius: 5px;
-  width: 16%;
-  padding: 5px;
-  justify-content: center;
+
+@media screen and (max-width: 576px) {
+  .main {
+    width: 95%;
+  }
 }
+.login {
+ float: right;
+}
+.submit {
+  width: 50%;
+}
+
+.success,
+.warning,
+.error {
+  transition: color 0.3s;
+}
+
+.success {
+  color: green;
+}
+
+.warning {
+  color: darkorange;
+}
+
+.error {
+  color: red;
+}
+.progress {
+
+}
+.progress-pass{
+}
+
+

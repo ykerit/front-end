@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
-import ModalForm from '../stand-component/modal-form';
+import ModalForm from '../stand-component/form-modal';
 import TableFrame from '../../layout/table-frame/table-frame';
 
 class RoleManage extends Component{
@@ -12,7 +12,7 @@ class RoleManage extends Component{
 
   componentDidMount(){
     this.props.dispatch({
-      type: 'auth/queryRoles',
+      type: 'user/queryRoles',
     })
   };
 
@@ -33,7 +33,7 @@ class RoleManage extends Component{
       }
       // 添加角色
       dispatch({
-        type: 'auth/createRole',
+        type: 'user/createRole',
         payload:values,
       });
 
@@ -45,7 +45,7 @@ class RoleManage extends Component{
   handleDelete = (key, dispatch) => {
     console.log(key);
     dispatch({
-      type: 'auth/delRole',
+      type: 'user/delRole',
       payload: key,
     })
   };
@@ -110,7 +110,7 @@ class RoleManage extends Component{
 RoleManage.propTypes = {
 };
 function mapStateToProps(state) {
-  const { roleData } = state.auth;
+  const { roleData } = state.user;
   console.log(roleData);
   return {
     roleData,

@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { Link} from 'dva/router'
-import style from "./login.css";
+import styles from "./login.css";
 
 const FormItem = Form.Item;
 
 class LoginForm extends Component {
 
   handleSubmit = (e) => {
-
     const { onOk } = this.props;
-
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -23,7 +21,7 @@ class LoginForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className={style.formContent}>
+      <div className={styles.main}>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>
             <span/>

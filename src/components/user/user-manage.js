@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
-import ModalForm from '../stand-component/modal-form';
+import ModalForm from '../stand-component/form-modal';
 import TableFrame from '../../layout/table-frame/table-frame';
 
 class UserManage extends  Component{
@@ -12,7 +12,7 @@ class UserManage extends  Component{
 
   componentDidMount(){
     this.props.dispatch({
-      type: 'auth/queryUsers',
+      type: 'user/queryUsers',
       payload: 1
     })
   };
@@ -33,7 +33,7 @@ class UserManage extends  Component{
         return;
       }
       dispatch({
-        type: 'auth/createUser',
+        type: 'user/createUser',
         payload: values
       });
       form.resetFields();
@@ -104,7 +104,7 @@ class UserManage extends  Component{
             onChange: (page) => {
               this.setState({current: page});
               dispatch({
-                type: 'auth/queryUsers',
+                type: 'user/queryUsers',
                 payload: page,
               })
             },
@@ -122,7 +122,7 @@ class UserManage extends  Component{
 UserManage.propTypes = {
 };
 function mapStateToProps(state) {
-  const { userData, user_total} = state.auth;
+  const { userData, user_total} = state.user;
   return {
     userData,
     user_total

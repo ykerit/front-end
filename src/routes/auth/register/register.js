@@ -1,13 +1,37 @@
 import React, { Component } from 'react'
-import { Form, Input, Tooltip,
-  Icon, Checkbox, Button } from 'antd';
+import { Form, Input, Button, Popover, Progress } from 'antd';
+import { Link} from 'dva/router'
 import style from './register.css';
 
+const passwordProgressMap = {
+  ok: 'success',
+  pass: 'normal',
+  poor: 'exception',
+};
+
+const passwordStatusMap = {
+  ok: (
+    <div className={style.success}>
+      强度：高
+    </div>
+  ),
+  pass: (
+    <div className={style.warning}>
+      强度：中
+    </div>
+  ),
+  poor: (
+    <div className={style.error}>
+      强度：太短
+    </div>
+  ),
+};
 
 class RegistrationForm extends Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
+    visible: false,
   };
 
   handleSubmit = (e) => {
@@ -25,6 +49,34 @@ class RegistrationForm extends Component {
     const value = e.target.value;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
+  getPasswordStatus = () => {
+    const { form } = this.props;
+    const value = form.getFieldValue('password');
+    if (value && value.length > 9) {
+      return 'ok';
+    }
+    if (value && value.length > 5) {
+      return 'pass';
+    }
+    return 'poor';
+  };
+
+  renderPasswordProgress = () => {
+    const { form } = this.props;
+    const value = form.getFieldValue('password');
+    const passwordStatus = this.getPasswordStatus();
+    return value && value.length ? (
+      <div className={style[`progress-${passwordStatus}`]}>
+        <Progress
+          status={passwordProgressMap[passwordStatus]}
+          className={style.progress}
+          strokeWidth={6}
+          percent={value.length * 10 > 100 ? 100 : value.length * 10}
+          showInfo={false}
+        />
+      </div>
+    ) : null;
+  };
 
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
@@ -36,68 +88,75 @@ class RegistrationForm extends Component {
   };
 
   validateToNextPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
+    const { visible, confirmDirty } = this.state;
+    if (!value) {
+      this.setState({
+        visible: !!value,
+      });
+      callback();
+    } else {
+      if (!visible) {
+        this.setState({
+          visible: !!value,
+        });
+      }
+      if (value.length < 6) {
+        callback('密码长度不足！');
+      } else {
+        const { form } = this.props;
+        if (value && confirmDirty) {
+          form.validateFields(['confirm'], { force: true });
+        }
+        callback();
+      }
     }
-    callback();
   };
 
 
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-      },
-    };
-
     return (
-      <div className={style.formContent}>
+      <div className={style.main}>
         <Form onSubmit={this.handleSubmit}>
           <Form.Item>
             <span/>
           </Form.Item>
-          <Form.Item
-            {...formItemLayout}
-            label={(
-              <span>
-              用户名&nbsp;
-                <Tooltip title="想叫啥?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-            )}
-          >
+          <Form.Item>
             {getFieldDecorator('nickname', {
               rules: [{ required: true, message: '请输入用户名!', whitespace: true }],
             })(
-              <Input />
+              <Input placeholder="用户名"/>
             )}
           </Form.Item>
-          <Form.Item
-            {...formItemLayout}
-            label="密码"
-          >
-            {getFieldDecorator('password', {
-              rules: [{
-                required: true, message: '请输入密码!',
-              }, {
-                validator: this.validateToNextPassword,
-              }],
-            })(
-              <Input type="password" />
-            )}
+          <Form.Item>
+            <Popover
+              getPopupContainer={node => node.parentNode}
+              content={
+                <div style={{ padding: '4px 0' }}>
+                  {passwordStatusMap[this.getPasswordStatus()]}
+                  {this.renderPasswordProgress()}
+                  <div style={{ marginTop: 10 }}>
+                    请至少输入 6 个字符。请不要使用容易被猜到的密码。
+                  </div>
+                </div>
+              }
+              overlayStyle={{ width: 240 }}
+              placement="right"
+              visible={this.state.visible}
+            >
+              {getFieldDecorator('password', {
+                rules: [{
+                  required: true, message: '请输入密码!',
+                }, {
+                  validator: this.validateToNextPassword,
+                }],
+              })(
+                <Input type="password" placeholder="至少6位密码, 区分大小写"/>
+              )}
+            </Popover>
           </Form.Item>
           <Form.Item
-            {...formItemLayout}
-            label="确认密码"
           >
             {getFieldDecorator('confirm', {
               rules: [{
@@ -106,18 +165,20 @@ class RegistrationForm extends Component {
                 validator: this.compareToFirstPassword,
               }],
             })(
-              <Input type="password" onBlur={this.handleConfirmBlur} />
+              <Input type="password" onBlur={this.handleConfirmBlur} placeholder="确认密码"/>
             )}
           </Form.Item>
           <Form.Item>
-            {getFieldDecorator('agreement', {
-              valuePropName: 'checked',
-            })(
-              <Checkbox>我已经阅读 <a href="">使用协议</a></Checkbox>
-            )}
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit" block>注册</Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              className={style.submit}
+            >注册
+            </Button>
+            <Link className={style.login} to="login">
+              使用已有账户登录
+            </Link>
           </Form.Item>
         </Form>
       </div>

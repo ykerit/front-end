@@ -1,9 +1,9 @@
 // 菜单选择
 export const selectTagList = isAdmin => {
   const menuSourceByadmin = [{
-    key: 'personal-center',
-    type: 'user',
-    name: '个人中心',
+    key: 'VisitorAnalysis',
+    type: 'bar-chart',
+    name: '访客分析',
     child: null
   },{
     key: 'user-management',
@@ -55,16 +55,24 @@ export const selectTagList = isAdmin => {
       name: '操作日志'
     }]
   },{
-    key: 'user-analysis',
-    type: 'bar-chart',
-    name: '用户分析',
-    child: null
+    key: 'Account',
+    type: 'user',
+    name: '个人中心',
+    child: [{
+      key: 'UserCenter',
+      type: 'user',
+      name: '个人中心'
+    },{
+      key: 'UserSetting',
+      type: 'setting',
+      name: '个人设置'
+    }]
   }];
 
   const menuSourceByUser = [{
-    key: 'personal-center',
-    type: 'user',
-    name: '个人中心',
+    key: 'VisitorAnalysis',
+    type: 'bar-chart',
+    name: '访客分析',
     child: null
   },{
     key: 'article',
@@ -77,10 +85,18 @@ export const selectTagList = isAdmin => {
     name: '分类管理',
     child: null
   },{
-    key: 'user-analysis',
-    type: 'bar-chart',
-    name: '用户分析',
-    child: null
+    key: 'Account',
+    type: 'user',
+    name: '个人',
+    child: [{
+      key: 'UserCenter',
+      type: 'user',
+      name: '个人中心'
+    },{
+      key: 'UserSetting',
+      type: 'setting',
+      name: '个人设置'
+    }]
   }];
   if (isAdmin === 1) {
     return menuSourceByadmin;

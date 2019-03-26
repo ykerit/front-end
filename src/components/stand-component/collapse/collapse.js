@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Icon, Empty} from'antd';
 import style from './collapse.css'
-import Panel from './panel';
+import Panel from '../panel';
 
 class Collapse extends Component{
 

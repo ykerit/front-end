@@ -2,7 +2,7 @@ import React,{ Component } from 'react'
 import { Modal, Form, Input } from 'antd';
 const FormItem = Form.Item;
 
-class ModalForm extends Component{
+class FormModal extends Component{
 
   render(){
     const { visible, onCancel, onCreate, title, data } = this.props;
@@ -37,5 +37,5 @@ class ModalForm extends Component{
   }
 }
 
-export default Form.create()(ModalForm);
+export default Form.create()(FormModal);
 

@@ -63,6 +63,14 @@ class MdeEditorPage extends Component {
     this.setState({text: mark, html: html});
   };
 
+  // 添加分类
+  addClassification = res => {
+    this.props.dispatch({
+      type: 'admin/createKind',
+      payload: { name: res }
+    });
+  };
+
   render(){
     const editOptions = {
       visible: this.state.visible,
@@ -73,7 +81,8 @@ class MdeEditorPage extends Component {
       classification: this.props.classification,
       onCancel: () => this.setState({visible: false}),
       onOpen: () => this.setState({visible: true}),
-      backAdmin: () => this.props.dispatch(routerRedux.push('/admin'))
+      backAdmin: () => this.props.dispatch(routerRedux.push('/admin')),
+      addClassification: this.addClassification
     };
 
     return (

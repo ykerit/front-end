@@ -1,18 +1,11 @@
 .content{
   display: -webkit-flex;
-  flex-direction: row;
-  min-height: 98%;
-  margin-top: 2px;
+  justify-content: center;
   background-color: #FFFFFF;
+  margin-top: 2px;
 }
 .middle{
   width: 40%;
-}
-.another{
-  width: 30%;
-}
-.other{
-  width: 30%;
 }
 .title{
   display: -webkit-flex;
@@ -26,9 +19,28 @@
 
 .htmlCon{
   min-height: 95%;
+  padding: 5px;
 }
 .comment{
   display: -webkit-flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .middle{
+    width: 95%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .middle{
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .middle{
+    width: 40%;
+  }
 }

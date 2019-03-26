@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { message, BackTop } from 'antd';
-import Comments from '../../stand-component/comment';
-import ArticleInfo from '../../stand-component/article-info';
-import CommonFrame from '../../../layout/common/common-frame';
-import { getlocalStorage } from '../../../utils/helper';
-import styles from './article-content.css';
+import Comments from '../../components/stand-component/comment/comment';
+import ArticleInfo from '../../components/stand-component/article-info/article-info';
+import CommonFrame from '../../layout/common/common-frame';
+import { getlocalStorage } from '../../utils/helper';
+import styles from './ArticleDetail.css';
 
 
-class ArticleContent extends Component{
+class ArticleDetail extends Component{
   constructor(props){
     super(props);
     props.dispatch({
@@ -20,6 +20,7 @@ class ArticleContent extends Component{
       page: props.match.params.id
     };
   }
+
   componentDidMount(){
     document.getElementById('content').style.minHeight= (window.screen.availHeight - 150) + 'px';
     this.props.dispatch({
@@ -27,6 +28,8 @@ class ArticleContent extends Component{
       payload: {article: this.state.page, page_size: 1 },
     })
   }
+  // 获取全部字数 限制换行
+
   handlerSubmit = () => {
     const id = this.props.id === '' ? getlocalStorage('id') : this.props.id;
     if (this.state.value !== '') {
@@ -98,4 +101,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ArticleContent)
+export default connect(mapStateToProps)(ArticleDetail)

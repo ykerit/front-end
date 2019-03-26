@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import {PanelGroup} from './component/PanelGroup/PanelGroup'
 import {CardPanel} from './component/CardPanel/CardPanel'
 
-class PersonalCenter extends Component{
+class VisitorAnalysis extends Component{
 
   state = {
     visible: false,
@@ -48,4 +48,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(PersonalCenter)
+export default connect(mapStateToProps)(VisitorAnalysis)

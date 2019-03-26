@@ -23,6 +23,7 @@ export default {
     permission: [],
     permission_total: null,
     collapse: false,
+    isMobile: false,
   },
   reducers: {
     querySuccess(state, action){
@@ -30,6 +31,12 @@ export default {
     },
     toggle(state, { payload }) {
       return {...state, collapse: payload}
+    },
+    isMobile(state, {payload}) {
+      return {
+        ...state,
+        isMobile: payload
+      }
     }
   },
   effects: {
@@ -75,6 +82,9 @@ export default {
         yield put({
           type: 'queryKind',
           payload: 1
+        });
+        yield put({
+          type: 'kind/queryAllClass'
         })
       }
     },

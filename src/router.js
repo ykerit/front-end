@@ -10,7 +10,7 @@ import FiledPage from './routes/filed/filed-page';
 import ClassificationPage from './routes/classification/classification-page'
 import Tags from './routes/tags/tag-page'
 import About from './routes/about/about-page'
-import ArticleContent from './components/article/article-content/article-content';
+import ArticleDetail from './routes/articleDetail/ArticleDetail';
 
 
 function RouterConfig({ history }) {
@@ -21,7 +21,7 @@ function RouterConfig({ history }) {
         <AuthorizedRoute path="/admin" exact component={AdminPage} />
         <Route path="/login" exact component={LoginPage} />
         <Route path="/register" exact component={RegisterPage}/>
-        <Route path="/article/:id" exact component={ArticleContent}/>
+        <Route path="/article/:id" exact component={ArticleDetail}/>
         <Route path="/filed" exact component={FiledPage}/>
         <Route path="/classification" exact component={ClassificationPage}/>
         <Route path="/tags" exact component={Tags}/>

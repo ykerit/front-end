@@ -15,6 +15,7 @@ app.model(require('./models/auth').default);
 app.model(require('./models/admin').default);
 app.model(require('./models/article').default);
 app.model(require('./models/kind').default);
+app.model(require('./models/user').default);
 // 4. Router
 app.router(require('./router').default);
 

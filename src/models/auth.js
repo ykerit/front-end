@@ -1,7 +1,5 @@
-import {login, queryUser, createRole, queryRole,
-  queryAdmin, createAdmin, createUser, delUser,
-  delAdmin, delRole, register, UploadImage,
-  queryUserInfo} from '../services/auth';
+import {login, register, UploadImage,
+  queryUserInfo, updateCurrentUser} from '../services/auth';
 import { routerRedux } from 'dva/router';
 import { message, notification, Icon } from 'antd'
 import { setlocalStorage, dellocalStorage, getlocalStorage } from '../utils/helper';
@@ -17,15 +15,13 @@ export default {
     id: '',
     name: '',
     face: '',
+    signature: '',
+    title: '',
+    group: '',
     token: '',
     role: '',
     is_authorization: false,
     message: '',
-    userData: [],
-    roleData: [],
-    adminData: [],
-    admin_total: null,
-    user_total: null
   },
   reducers: {
     loginSuccess(state, action) {
@@ -41,9 +37,6 @@ export default {
       return { ...state, id:'', name: '',
         message:'登出成功', token: '',
         is_authorization: false, userData: []}
-    },
-    querySuccess(state, action){
-      return { ...state, ...action.payload}
     },
     queryUserSuccess(state, action){
       return { ...state, ...action.payload}
@@ -87,87 +80,6 @@ export default {
         })
       }
     },
-    *queryUsers({ payload },{call, put}){
-      const data = yield call(queryUser, payload);
-      if (data && data.status === 200) {
-        yield put({
-          type: 'querySuccess',
-          payload: data
-        })
-      }
-    },
-    *queryRoles({ payload }, {call, put}){
-      const data = yield call(queryRole, payload);
-      if (data && data.status === 200){
-        yield  put({
-          type: 'querySuccess',
-          payload: data
-        })
-      }
-    },
-    *queryAdmins({ payload }, {call, put}){
-      const data = yield call(queryAdmin, payload);
-      if (data && data.status === 200){
-        yield put({
-          type: 'querySuccess',
-          payload: data
-        })
-      }
-    },
-    *createRole({ payload }, {call, put}){
-      const data = yield call(createRole, payload);
-      if (data && data.status === 200){
-        yield put({
-          type: 'queryRoles',
-        })
-      }
-    },
-    *createAdmin({ payload }, {call, put}){
-      const data = yield call(createAdmin, payload);
-      if (data && data.status === 200){
-        yield put({
-          type: 'queryAdmins',
-          payload: 1
-        })
-      }
-    },
-    *createUser({ payload }, {call, put}){
-      const data = yield call(createUser, payload);
-      if (data && data.status === 200){
-        yield put({
-          type: 'queryUsers',
-          payload: 1
-        })
-      }
-    },
-    *delUser({ payload }, {call, put}){
-      const data = yield call(delUser, payload);
-      if (data && data.status === 200){
-        yield put({
-          type: 'queryUsers',
-          payload: 1
-        })
-      }
-    },
-
-    *delAdmin({ payload }, {call, put}){
-      const data = yield call(delAdmin, payload);
-      if (data && data.status === 200){
-        yield put({
-          type: 'queryAdmins',
-          payload: 1
-        })
-      }
-    },
-
-    *delRole({ payload }, {call, put}){
-      const data = yield call(delRole, payload);
-      if (data && data.status === 200){
-        yield put({
-          type: 'queryRoles'
-        })
-      }
-    },
     *UploadAvatar({ payload }, {call, put}){
       const data = yield call(UploadImage, payload);
       if (data && data.status === 200){
@@ -197,6 +109,18 @@ export default {
         yield put(routerRedux.push('/blank'));
         yield put(routerRedux.push('/'));
         dellocalStorage();
+      }
+    },
+    *updateCurrentUser({ payload }, {call, put }) {
+      const data = yield call(updateCurrentUser, payload);
+      if (data && data.status === 200) {
+        yield put({
+          type: 'queryUserInfo',
+          payload: data.id
+        });
+        yield message.success('更新成功!')
+      } else {
+        yield message.error('更新信息失败!')
       }
     }
   },

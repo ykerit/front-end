@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import CommonFrame from '../../layout/common/common-frame'
-import ArticleList from '../../components/article/list-article/article-list';
+import ArticleList from '../../components/article/list-article/index';
 import {getlocalStorage, dellocalStorage} from '../../utils/helper';
-import styles from './IndexPage.css';
 
 class IndexPage extends Component {
+  state = {
+    current_page: 1,
+  };
   componentDidMount(){
     if (getlocalStorage('id')) {
       this.props.dispatch({
@@ -21,18 +23,41 @@ class IndexPage extends Component {
     });
     this.props.dispatch({
       type: 'kind/queryAllClass'
-    })
+    });
+    if (window.matchMedia("(max-width: 480px)").matches) {
+      this.props.dispatch({
+        type: 'admin/isMobile',
+        payload: true,
+      });
+    }
   }
+  loadingMoreArticle = () => {
+    this.props.dispatch({
+      type: 'article/appendArticle',
+      payload: this.state.current_page+1,
+    });
+    this.setState({current_page: this.state.current_page+1});
+  };
 
   render(){
+    const { articleList, total } = this.props;
     return (
-      <CommonFrame ourStyle={styles.content}>
-        <div className={styles.center}>
-          <ArticleList/>
-        </div>
+      <CommonFrame>
+          <ArticleList
+            loadingMoreArticle={this.loadingMoreArticle}
+            title="所有文章"
+            list={articleList}
+            total={total}/>
       </CommonFrame>
     );
   }
 }
+function mapStateToProps(state) {
+  const { articleList, total } = state.article;
+  return {
+    articleList,
+    total
+  };
+}
 
-export default connect()(IndexPage);
+export default connect(mapStateToProps)(IndexPage);

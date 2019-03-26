@@ -73,6 +73,17 @@ export function queryUserInfo(id) {
     method: 'GET',
   })
 }
+export function updateCurrentUser({id, values}){
+  let formData = new FormData();
+  formData.append('nickname', values.nickname);
+  formData.append('signature', values.signature);
+  formData.append('title', values.title);
+  formData.append('group', values.group);
+  return request(`user/${id}`,{
+    method: 'PUT',
+    body: formData
+  });
+}
 
 export function login(values){
   let formData = new FormData();

@@ -14,7 +14,7 @@ class Menus extends Component{
         theme="light"
         mode="inline"
         inlineCollapsed
-        defaultSelectedKeys={['personal-center']}
+        defaultSelectedKeys={['VisitorAnalysis']}
         onClick={key => selectedKey(key)}
       >
         {

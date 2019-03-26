@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
 import TableFrame from '../../layout/table-frame/table-frame'
-import ModalForm from '../stand-component/modal-form';
+import ModalForm from '../stand-component/form-modal';
 
 class PermissionManage extends Component{
 

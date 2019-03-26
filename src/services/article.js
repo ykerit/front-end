@@ -27,6 +27,9 @@ export function queryArticle(id) {
 export function queryAllArticle(page_size) {
   return request(`article?page_size=${page_size}`)
 }
+export function queryCurrentUserArticle(query) {
+  return request(`user_article/${query.id}?page_size=${query.page_size}`)
+}
 
 export async function queryComment(value) {
   return request(`comment?article=${value.article}&page_size=${value.page_size}`)
