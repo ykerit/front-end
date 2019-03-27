@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
-import ModalForm from '../stand-component/modal-form';
-import TableFrame from '../../layout/table-frame/table-frame';
+import ModalForm from '../stand-component/form-modal';
+import TableFrame from '../../layouts/TableFrame/TableFrame';
 
 class KindManage extends Component{
 
@@ -91,7 +91,7 @@ class KindManage extends Component{
     const title = [{title: '分类名', en: 'name'}];
 
     return (
-      <TableFrame text="添加分类" showModal={this.showModal}>
+      <TableFrame text="添加分类" showModal={this.showModal} isButton={true}>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}

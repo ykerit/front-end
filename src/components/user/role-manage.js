@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
-import ModalForm from '../stand-component/modal-form';
-import TableFrame from '../../layout/table-frame/table-frame';
+import ModalForm from '../stand-component/form-modal';
+import TableFrame from '../../layouts/TableFrame/TableFrame';
 
 class RoleManage extends Component{
 
@@ -12,7 +12,7 @@ class RoleManage extends Component{
 
   componentDidMount(){
     this.props.dispatch({
-      type: 'auth/queryRoles',
+      type: 'user/queryRoles',
     })
   };
 
@@ -33,7 +33,7 @@ class RoleManage extends Component{
       }
       // 添加角色
       dispatch({
-        type: 'auth/createRole',
+        type: 'user/createRole',
         payload:values,
       });
 
@@ -45,7 +45,7 @@ class RoleManage extends Component{
   handleDelete = (key, dispatch) => {
     console.log(key);
     dispatch({
-      type: 'auth/delRole',
+      type: 'user/delRole',
       payload: key,
     })
   };
@@ -89,7 +89,7 @@ class RoleManage extends Component{
     // 关于为啥需要在这里dispatch 是因为各个modal需要不同的dispatch， 在handleCreate函数中 不能直接传入参数
     // 所以需要 使用箭头函数 来传入dispatch参数 因为dispatch函数是由props父组件属性携带的
     return (
-      <TableFrame text="添加角色" showModal={this.showModal}>
+      <TableFrame text="添加角色" showModal={this.showModal} isButton={true}>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}
@@ -110,7 +110,7 @@ class RoleManage extends Component{
 RoleManage.propTypes = {
 };
 function mapStateToProps(state) {
-  const { roleData } = state.auth;
+  const { roleData } = state.user;
   console.log(roleData);
   return {
     roleData,

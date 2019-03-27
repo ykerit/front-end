@@ -22,10 +22,28 @@ export default {
     kind_total: null,
     permission: [],
     permission_total: null,
+    collapse: false,
+    isMobile: false,
+    menuSelectKey: 'VisitorAnalysis',
   },
   reducers: {
     querySuccess(state, action){
       return { ...state, ...action.payload};
+    },
+    toggle(state, { payload }) {
+      return {...state, collapse: payload}
+    },
+    isMobile(state, {payload}) {
+      return {
+        ...state,
+        isMobile: payload
+      }
+    },
+    selectMenu(state, { payload}){
+      return {
+        ...state,
+        menuSelectKey: payload,
+      }
     },
   },
   effects: {
@@ -71,6 +89,9 @@ export default {
         yield put({
           type: 'queryKind',
           payload: 1
+        });
+        yield put({
+          type: 'kind/queryAllClass'
         })
       }
     },

@@ -33,7 +33,9 @@ class KindPlugin extends Component{
     if (kinds.length > 0) {
       this.props.receiveKind(kinds);
     }
-    console.log(kinds);
+    if (kinds.length) {
+      this.props.addClassification(kinds[kinds.length-1]);
+    }
     this.setState({
       kinds,
       inputVisible: false,
@@ -55,6 +57,7 @@ class KindPlugin extends Component{
 
   render(){
     const { kinds, inputVisible, inputValue } = this.state;
+    // 分类 和添加分类函数
     const { classification } = this.props;
     return (
       <div>

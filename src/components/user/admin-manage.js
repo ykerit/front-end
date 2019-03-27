@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
-import ModalForm from '../stand-component/modal-form';
-import TableFrame from '../../layout/table-frame/table-frame';
+import ModalForm from '../stand-component/form-modal';
+import TableFrame from '../../layouts/TableFrame/TableFrame';
 
 class AdminManage extends Component{
 
@@ -13,7 +13,7 @@ class AdminManage extends Component{
 
   componentDidMount(){
     this.props.dispatch({
-      type: 'auth/queryAdmins',
+      type: 'user/queryAdmins',
       payload: 1
     })
   };
@@ -35,7 +35,7 @@ class AdminManage extends Component{
       }
       // 添加管理员
       dispatch({
-        type: 'auth/createAdmin',
+        type: 'user/createAdmin',
         payload:values,
       });
 
@@ -46,7 +46,7 @@ class AdminManage extends Component{
 
   handleDelete = (key, dispatch) => {
     dispatch({
-      type: 'auth/delAdmin',
+      type: 'user/delAdmin',
       payload: key,
     })
   };
@@ -93,7 +93,7 @@ class AdminManage extends Component{
     const title = [{title: '姓名', en: 'name'}, {title: '密码', en: 'password'}];
 
     return (
-      <TableFrame text="添加管理员" showModal={this.showModal}>
+      <TableFrame text="添加管理员" showModal={this.showModal} isButton={true}>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}
@@ -110,7 +110,7 @@ class AdminManage extends Component{
             onChange: (page) => {
               this.setState({current: page});
               dispatch({
-                type: 'auth/queryAdmins',
+                type: 'user/queryAdmins',
                 payload: page,
               })
             },
@@ -127,7 +127,7 @@ class AdminManage extends Component{
 AdminManage.propTypes = {
 };
 function mapStateToProps(state) {
-  const { adminData, admin_total } = state.auth;
+  const { adminData, admin_total } = state.user;
   return {
     adminData,
     admin_total

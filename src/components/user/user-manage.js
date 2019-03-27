@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
-import ModalForm from '../stand-component/modal-form';
-import TableFrame from '../../layout/table-frame/table-frame';
+import ModalForm from '../stand-component/form-modal';
+import TableFrame from '../../layouts/TableFrame/TableFrame';
 
 class UserManage extends  Component{
   state = {
@@ -12,7 +12,7 @@ class UserManage extends  Component{
 
   componentDidMount(){
     this.props.dispatch({
-      type: 'auth/queryUsers',
+      type: 'user/queryUsers',
       payload: 1
     })
   };
@@ -33,7 +33,7 @@ class UserManage extends  Component{
         return;
       }
       dispatch({
-        type: 'auth/createUser',
+        type: 'user/createUser',
         payload: values
       });
       form.resetFields();
@@ -42,7 +42,7 @@ class UserManage extends  Component{
   };
   handleDelete = (key, dispatch) => {
     dispatch({
-      type: 'auth/delUser',
+      type: 'user/delUser',
       payload: key,
     })
   };
@@ -87,7 +87,7 @@ class UserManage extends  Component{
     const title = [{title: '姓名', en: 'name'}, {title: '密码', en: 'password'}];
 
     return (
-      <TableFrame text="添加用户" showModal={this.showModal}>
+      <TableFrame text="添加用户" showModal={this.showModal} isButton={true}>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}
@@ -104,7 +104,7 @@ class UserManage extends  Component{
             onChange: (page) => {
               this.setState({current: page});
               dispatch({
-                type: 'auth/queryUsers',
+                type: 'user/queryUsers',
                 payload: page,
               })
             },
@@ -122,7 +122,7 @@ class UserManage extends  Component{
 UserManage.propTypes = {
 };
 function mapStateToProps(state) {
-  const { userData, user_total} = state.auth;
+  const { userData, user_total} = state.user;
   return {
     userData,
     user_total

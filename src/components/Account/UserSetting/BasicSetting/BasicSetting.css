@@ -1,0 +1,43 @@
+.baseView {
+  display: flex;
+  padding-top: 12px;
+}
+.left {
+  min-width: 224px;
+  max-width: 448px;
+}
+.right {
+  padding-left: 104px;
+}
+
+.avatarContent {
+  width: 144px;
+  height: 144px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  display: -webkit-flex;
+  justify-content: center;
+}
+.button_view {
+  width: 144px;
+  text-align: center;
+}
+.avatar {
+  width: 90%;
+  height: 90%;
+}
+
+@media screen and (max-width: 1200px) {
+  .baseView {
+    flex-direction: column-reverse;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 448px;
+    padding: 20px;
+  }
+}

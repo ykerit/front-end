@@ -1,0 +1,6 @@
+.side {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  left: 0;
+  height: 100vh;
+}

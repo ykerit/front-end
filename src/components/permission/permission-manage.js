@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
-import TableFrame from '../../layout/table-frame/table-frame'
-import ModalForm from '../stand-component/modal-form';
+import TableFrame from '../../layouts/TableFrame/TableFrame'
+import ModalForm from '../stand-component/form-modal';
 
 class PermissionManage extends Component{
 
@@ -104,7 +104,7 @@ class PermissionManage extends Component{
       {title: '方法', en: 'method'}];
 
     return (
-      <TableFrame text="添加权限" showModal={this.showModal}>
+      <TableFrame text="添加权限" showModal={this.showModal} isButton={true}>
         <ModalForm
           visible={this.state.visible}
           onCancel={this.handleCancel}

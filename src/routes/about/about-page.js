@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import CommonFrame from '../../layout/common/common-frame';
-import {  } from 'antd';
-import style from './about.css';
+import CommonFrame from '../../layouts/Common/CommonFrame';
 
 class About extends Component{
   render() {
     return (
-      <CommonFrame ourStyle={style.content}>
-        for me
+      <CommonFrame>
+          for me
       </CommonFrame>
     );
   }

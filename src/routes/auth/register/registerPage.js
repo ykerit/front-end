@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import RegistrationForm from './register';
-import CommonFrame from '../../../layout/common/common-frame'
-import style from './register.css';
-
+import UserLayout from '../../../layouts/UserLayout/UserLayout'
 
 function RegisterPage({dispatch}) {
   function register(values) {
@@ -13,9 +11,9 @@ function RegisterPage({dispatch}) {
     })
   }
   return (
-    <CommonFrame ourStyle={style.content}>
+    <UserLayout>
       <RegistrationForm onOk={ register } />
-    </CommonFrame>
+    </UserLayout>
   );
 }
 

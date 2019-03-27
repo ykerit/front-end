@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table } from 'antd';
+import TableFrame from '../../layouts/TableFrame/TableFrame'
 
 class AdminLog extends Component{
   state = {
@@ -43,7 +44,7 @@ class AdminLog extends Component{
     }];
 
     return (
-      <div>
+      <TableFrame>
         <Table
           rowKey={record => record.id}
           columns={columns}
@@ -61,7 +62,7 @@ class AdminLog extends Component{
             pageSize: 10,
           }}
         />
-      </div>
+      </TableFrame>
     );
   }
 }

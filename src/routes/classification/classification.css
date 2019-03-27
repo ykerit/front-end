@@ -1,7 +1,11 @@
 .content{
-  margin-top: 2px;
-  display: -webkit-flex;
   width: 70%;
   background-color: #FFFFFF;
-  margin-left: 15%;
 }
+
+@media screen and (max-width: 480px) {
+  .content{
+    width: 95%;
+  }
+}
+

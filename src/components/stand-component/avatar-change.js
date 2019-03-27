@@ -43,7 +43,6 @@ class AvatarChange extends Component{
   render(){
     const { visible, onCancel } = this.props;
 
-
     return (
       <Modal
         visible={visible}

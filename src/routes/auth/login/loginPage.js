@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import LoginForm from './login';
-import CommonFrame from '../../../layout/common/common-frame'
-import style from "./login.css";
+import UserLayout from '../../../layouts/UserLayout/UserLayout'
 
 
 function LoginPage({dispatch}) {
@@ -13,9 +12,9 @@ function LoginPage({dispatch}) {
       })
     }
     return (
-      <CommonFrame ourStyle={style.content}>
+      <UserLayout>
         <LoginForm onOk={ login }/>
-      </CommonFrame>
+      </UserLayout>
     );
 }
 

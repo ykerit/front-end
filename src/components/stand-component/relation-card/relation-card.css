@@ -1,0 +1,37 @@
+.list {
+  height: 380px;
+  overflow: auto;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  margin-bottom:25px;
+  line-height: 18px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: bold;
+}
+.list::-webkit-scrollbar {
+  width: 20px;
+  height: 14px;
+}
+
+.list::-webkit-scrollbar-track,
+.list::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 5px solid transparent;
+}
+
+.list::-webkit-scrollbar-track {
+  box-shadow: 1px 1px 5px rgba(0,0,0,.2) inset;
+}
+
+.list::-webkit-scrollbar-thumb {
+  min-height: 20px;
+  background-clip: content-box;
+  box-shadow: 0 0 0 5px rgba(0,0,0,.2) inset;
+}
+
+.list::-webkit-scrollbar-corner {
+  background: transparent;
+}

@@ -1,0 +1,15 @@
+.container {
+  padding-top: 2px;
+  display: -webkit-flex;
+  justify-content: center;
+}
+.content{
+  width: 70%;
+  background-color: #FFFFFF;
+}
+
+@media screen and (max-width: 480px) {
+  .content{
+    width: 100%;
+  }
+}

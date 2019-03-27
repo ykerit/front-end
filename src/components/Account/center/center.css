@@ -1,0 +1,49 @@
+.avatarHolder {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.img {
+    width: 104px;
+    height: 104px;
+    margin-bottom: 20px;
+}
+
+.name {
+  margin-bottom: 4px;
+  color: #192c3e;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.detail p {
+  position: relative;
+}
+
+
+.title {
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+.group {
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+.address {
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+
+.tagsTitle,
+.teamTitle {
+  margin-bottom: 12px;
+  color: black;
+  font-weight: 500;
+}
+.tabsCard {
+  
+}

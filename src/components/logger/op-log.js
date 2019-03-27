@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table } from 'antd';
+import TableFrame from '../../layouts/TableFrame/TableFrame';
 
 class OpLog extends Component{
   state = {
@@ -47,25 +48,25 @@ class OpLog extends Component{
     }];
 
     return (
-      <div>
-        <Table
-          rowKey={record => record.id}
-          columns={columns}
-          dataSource={OpLog}
-          pagination={{
-            onChange: (page) => {
-              this.setState({current: page});
-              dispatch({
-                type: 'admin/queryLog',
-                payload: {type: 'opLog', pageSize: page},
-              })
-            },
-            current: this.state.current,
-            total: op_total,
-            pageSize: 10,
-          }}
-        />
-      </div>
+        <TableFrame>
+          <Table
+            rowKey={record => record.id}
+            columns={columns}
+            dataSource={OpLog}
+            pagination={{
+              onChange: (page) => {
+                this.setState({current: page});
+                dispatch({
+                  type: 'admin/queryLog',
+                  payload: {type: 'opLog', pageSize: page},
+                })
+              },
+              current: this.state.current,
+              total: op_total,
+              pageSize: 10,
+            }}
+          />
+        </TableFrame>
     );
   }
 }

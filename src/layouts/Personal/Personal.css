@@ -1,0 +1,13 @@
+.content {
+  display: -webkit-flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.news {
+  margin:2px 40px 0 0;
+  cursor: pointer;
+}
+.dropDown {
+  margin-right: 15px;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import CommonFrame from '../../layout/common/common-frame';
-import Collapse from '../../components/stand-component/collapse'
+import CommonFrame from '../../layouts/Common/CommonFrame';
+import Collapse from '../../components/stand-component/collapse/collapse'
 import style from './classification.css';
 
 
@@ -10,8 +10,10 @@ class ClassificationPage extends Component{
   render() {
     const { classification } = this.props;
     return (
-      <CommonFrame ourStyle={style.content}>
-        <Collapse data={classification}/>
+      <CommonFrame>
+        <div className={style.content}>
+          <Collapse data={classification}/>
+        </div>
       </CommonFrame>
     );
   }
