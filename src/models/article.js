@@ -1,6 +1,7 @@
 import {createArticle, queryAllArticle, queryArticle,
-  createComment, queryComment, queryTimeLine,
+  createComment, queryComment, queryTimeLine, delArticle,
 queryCurrentUserArticle} from "../services/article";
+import { getlocalStorage } from '../utils/helper';
 
 export default {
   namespace: 'article',
@@ -99,6 +100,19 @@ export default {
         yield  put({
           type: 'queryAllArticle',
           payload: 1,
+        })
+      }
+    },
+    *deleteArticle({ payload }, { call, put }) {
+      const data = yield call(delArticle, payload);
+      if (data && data.status === 200){
+        yield  put({
+          type: 'queryAllArticle',
+          payload: 1,
+        });
+        yield  put({
+          type: 'queryCurrentUserArticle',
+          payload: {id: getlocalStorage('id'), page_size: 1},
         })
       }
     },

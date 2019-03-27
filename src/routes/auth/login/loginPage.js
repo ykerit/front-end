@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import LoginForm from './login';
-import UserLayout from '../../../layout/UserLayout/UserLayout'
+import UserLayout from '../../../layouts/UserLayout/UserLayout'
 
 
 function LoginPage({dispatch}) {

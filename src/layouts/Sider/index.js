@@ -20,9 +20,15 @@ class Side extends Component{
       payload: breaks
     })
   };
+  selectedKey = key => {
+    this.props.dispatch({
+      type: 'admin/selectMenu',
+      payload: key.key
+    });
+  };
 
   render(){
-    const { selectedKey, role, collapse} = this.props;
+    const { role, collapse, menuSelectKey} = this.props;
 
     return (
       <Sider
@@ -36,7 +42,10 @@ class Side extends Component{
         className={style.side}
       >
         <Logo collapse={collapse}/>
-        <Menus selectedKey={selectedKey} menus={selectTagList(role)}/>
+        <Menus
+          selectedKey={this.selectedKey}
+          menus={selectTagList(role)}
+          menuSelectKey={menuSelectKey}/>
       </Sider>
     );
   }
@@ -44,10 +53,12 @@ class Side extends Component{
 
 function mapStateToProps(state) {
   const { role } = state.auth;
-  const { collapse } = state.admin;
+  const { collapse, menuSelectKey, openSelectKey } = state.admin;
   return {
     role,
-    collapse
+    collapse,
+    menuSelectKey,
+    openSelectKey
   };
 }
 

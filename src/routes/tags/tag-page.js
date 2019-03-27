@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import CommonFrame from '../../layout/common/common-frame';
+import CommonFrame from '../../layouts/Common/CommonFrame';
 import { Tag, Card } from 'antd';
 
 class Tags extends Component{

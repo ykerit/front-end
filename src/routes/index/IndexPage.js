@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import CommonFrame from '../../layout/common/common-frame'
+import CommonFrame from '../../layouts/Common/CommonFrame'
 import ArticleList from '../../components/article/list-article/index';
 import {getlocalStorage, dellocalStorage} from '../../utils/helper';
 
@@ -24,12 +24,6 @@ class IndexPage extends Component {
     this.props.dispatch({
       type: 'kind/queryAllClass'
     });
-    if (window.matchMedia("(max-width: 480px)").matches) {
-      this.props.dispatch({
-        type: 'admin/isMobile',
-        payload: true,
-      });
-    }
   }
   loadingMoreArticle = () => {
     this.props.dispatch({

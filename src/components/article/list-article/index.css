@@ -1,6 +1,6 @@
 .listItemExtra {
   width: 272px;
-  height: 1px;
+  height: 32px;
 }
 .selfTrigger {
   margin-left: 12px;
@@ -22,8 +22,8 @@
 
 @media screen and (min-width: 992px) {
   .listItemExtra {
-    width: 0;
-    height: 1px;
+    width: 64px;
+    height: 32px;
   }
 }
 .card {

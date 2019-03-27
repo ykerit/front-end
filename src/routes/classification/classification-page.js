@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import CommonFrame from '../../layout/common/common-frame';
+import CommonFrame from '../../layouts/Common/CommonFrame';
 import Collapse from '../../components/stand-component/collapse/collapse'
 import style from './classification.css';
 

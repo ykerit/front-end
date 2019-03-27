@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table } from 'antd';
-import TableFrame from '../../layout/table-frame/table-frame'
+import TableFrame from '../../layouts/TableFrame/TableFrame'
 
 class AdminLog extends Component{
   state = {

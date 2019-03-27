@@ -2,9 +2,12 @@
   display: flex;
   align-items: center;
   padding-left: 15px;
+  height: 60px;
 }
 .logo img {
   height: 40px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .logo h1 {

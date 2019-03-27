@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Button, Row } from 'antd';
-import style from './table-frame.css'
+import style from './TableFrame.css'
 
 export default class TableFrame extends Component{
   render() {

@@ -27,7 +27,7 @@ class BasicSetting extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { data } = this.props;
+    const { data, dispatch } = this.props;
     return (
       <div className={styles.baseView}>
       <div className={styles.left}>
@@ -87,7 +87,7 @@ class BasicSetting extends Component {
           visible={this.state.visible}
           onCancel={() => this.setState({visible: false})}
           changeDisplay={() => this.setState({visible: false})}
-          dispatch={this.props.dispatch}
+          dispatch={dispatch}
         />
       </div>
     );

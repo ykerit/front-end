@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux} from 'dva/router';
-import ArticleList from './list-article/index';
 import TableFrame from '../../layouts/TableFrame/TableFrame';
+import ArticleList from "./list-article";
 
-class ArticeManage extends Component{
+class CurrentArticleManage extends Component{
   state = {
     current_page: 1,
   };
   componentDidMount(){
     this.props.dispatch({
-      type: 'article/queryAllArticle',
-      payload: 1
+      type: 'article/queryCurrentUserArticle',
+      payload: {id: this.props.id, page_size: 1}
     })
   };
 
   loadingMoreArticle = () => {
     this.props.dispatch({
-      type: 'article/appendArticle',
-      payload: this.state.current_page+1,
+      type: 'article/appendCurrentUserArticle',
+      payload: {id: this.props.id, page_size: this.state.current_page+1},
     });
     this.setState({current_page: this.state.current_page+1});
   };
 
   render(){
-    const { articleList, total } = this.props;
+    const { currentUserList, currentUserList_total } = this.props;
     return (
       <TableFrame
         text="新建文章"
@@ -32,8 +32,8 @@ class ArticeManage extends Component{
         isButton={true}>
         <ArticleList
           title="所有文章"
-          list={articleList}
-          total={total}
+          list={currentUserList}
+          total={currentUserList_total}
           loadingMoreArticle={this.loadingMoreArticle}
         />
       </TableFrame>
@@ -41,11 +41,13 @@ class ArticeManage extends Component{
   }
 }
 function mapStateToProps(state) {
-  const { articleList, total } = state.article;
+  const { id } = state.auth;
+  const { currentUserList, currentUserList_total } = state.article;
   return {
-    articleList,
-    total
+    id,
+    currentUserList,
+    currentUserList_total
   };
 }
 
-export default connect(mapStateToProps)(ArticeManage);
+export default connect(mapStateToProps)(CurrentArticleManage);

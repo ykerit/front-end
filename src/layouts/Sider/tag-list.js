@@ -6,7 +6,7 @@ export const selectTagList = isAdmin => {
     name: '访客分析',
     child: null
   },{
-    key: 'user-management',
+    key: 'UserManagement',
     type: 'team',
     name: '用户管理',
     child: [{
@@ -70,6 +70,11 @@ export const selectTagList = isAdmin => {
   }];
 
   const menuSourceByUser = [{
+    key: 'VisitorAnalysis',
+    type: 'bar-chart',
+    name: '访客分析',
+    child: null
+  },{
     key: 'Account',
     type: 'user',
     name: '个人',
@@ -81,12 +86,12 @@ export const selectTagList = isAdmin => {
       key: 'UserSetting',
       type: 'setting',
       name: '个人设置'
+    },{
+      key: 'CurrentArticle',
+      type: 'profile',
+      name: '文章管理',
+      child: null
     }]
-  },{
-    key: 'VisitorAnalysis',
-    type: 'bar-chart',
-    name: '访客分析',
-    child: null
   },{
     key: 'kind',
     type: 'database',

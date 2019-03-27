@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import RegistrationForm from './register';
-import UserLayout from '../../../layout/UserLayout/UserLayout'
+import UserLayout from '../../../layouts/UserLayout/UserLayout'
 
 function RegisterPage({dispatch}) {
   function register(values) {

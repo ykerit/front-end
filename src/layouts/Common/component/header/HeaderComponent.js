@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'dva';
 import { Icon, Menu, Dropdown, Layout } from 'antd';
 import { Link } from 'dva/router';
-import Logo from '../../../side/logo/logo';
 import {getlocalStorage} from '../../../../utils/helper';
 import style from './header.css';
+import Logo from "../../../Sider/logo/logo";
 const { Header } = Layout;
 
 const SubMenu = Menu.SubMenu;
@@ -13,6 +13,15 @@ class HeaderComponent extends Component{
   state = {
     show: true,
   };
+  constructor(props) {
+    super(props);
+    if (window.matchMedia("(max-width: 480px)").matches) {
+      props.dispatch({
+        type: 'admin/isMobile',
+        payload: true,
+      });
+    }
+  }
 
   componentDidMount() {
     if (this.props.is_authorization || getlocalStorage('id')) {

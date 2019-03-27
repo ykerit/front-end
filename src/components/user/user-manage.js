@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
 import ModalForm from '../stand-component/form-modal';
-import TableFrame from '../../layout/table-frame/table-frame';
+import TableFrame from '../../layouts/TableFrame/TableFrame';
 
 class UserManage extends  Component{
   state = {
@@ -42,7 +42,7 @@ class UserManage extends  Component{
   };
   handleDelete = (key, dispatch) => {
     dispatch({
-      type: 'auth/delUser',
+      type: 'user/delUser',
       payload: key,
     })
   };

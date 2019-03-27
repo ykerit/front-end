@@ -24,6 +24,7 @@ export default {
     permission_total: null,
     collapse: false,
     isMobile: false,
+    menuSelectKey: 'VisitorAnalysis',
   },
   reducers: {
     querySuccess(state, action){
@@ -37,7 +38,13 @@ export default {
         ...state,
         isMobile: payload
       }
-    }
+    },
+    selectMenu(state, { payload}){
+      return {
+        ...state,
+        menuSelectKey: payload,
+      }
+    },
   },
   effects: {
     *queryLog({ payload }, {call, put}){

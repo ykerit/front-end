@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { message, BackTop } from 'antd';
 import Comments from '../../components/stand-component/comment/comment';
 import ArticleInfo from '../../components/stand-component/article-info/article-info';
-import CommonFrame from '../../layout/common/common-frame';
+import CommonFrame from '../../layouts/Common/CommonFrame';
 import { getlocalStorage } from '../../utils/helper';
 import styles from './ArticleDetail.css';
 

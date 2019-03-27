@@ -50,7 +50,7 @@ class Info extends Component {
 
 
   render() {
-    const { isMobile, data } = this.props;
+    const { isMobile, data, dispatch } = this.props;
     const { selectKey } = this.state;
     return (
       <div
@@ -67,7 +67,7 @@ class Info extends Component {
           </div>
           <div className={styles.right}>
             <div className={styles.title}>{this.getRightTitle()}</div>
-            <BasicSetting data={data} upCurrentInfo={this.upCurrentInfo}/>
+            <BasicSetting data={data} upCurrentInfo={this.upCurrentInfo} dispatch={dispatch}/>
           </div>
         </div>
     );

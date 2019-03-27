@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table, Popconfirm, Button } from 'antd';
 import ModalForm from '../stand-component/form-modal';
-import TableFrame from '../../layout/table-frame/table-frame';
+import TableFrame from '../../layouts/TableFrame/TableFrame';
 
 class AdminManage extends Component{
 

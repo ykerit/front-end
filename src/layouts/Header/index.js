@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 import { connect } from 'dva';
 import { Layout, Icon } from 'antd';
-import Personal from '../personal/personal'
+import Personal from '../Personal/Personal'
 import style from './index.css'
 const { Header } = Layout;
 
 // 页眉
 class Headers extends Component{
+  constructor(props) {
+    super(props);
+    if (window.matchMedia("(max-width: 480px)").matches) {
+      props.dispatch({
+        type: 'admin/isMobile',
+        payload: true,
+      });
+    }
+  }
 
   toggle = () => {
     this.props.dispatch({

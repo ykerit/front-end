@@ -2,19 +2,18 @@ import React, { Component } from 'react';
 import {
   Menu, Icon
 } from 'antd';
-import { connect } from 'dva';
 const SubMenu = Menu.SubMenu;
 
-class Menus extends Component{
+export default class Menus extends Component{
 
   render(){
-    const { selectedKey, menus } = this.props;
+    const { selectedKey, menus, menuSelectKey } = this.props;
     return (
       <Menu
         theme="light"
         mode="inline"
         inlineCollapsed
-        defaultSelectedKeys={['VisitorAnalysis']}
+        selectedKeys={[menuSelectKey]}
         onClick={key => selectedKey(key)}
       >
         {
@@ -44,11 +43,4 @@ class Menus extends Component{
     );
   }
 }
-function mapStateToProps(state) {
-  const { role } = state.auth;
-  return {
-    role
-  };
-}
 
-export default connect(mapStateToProps)(Menus);

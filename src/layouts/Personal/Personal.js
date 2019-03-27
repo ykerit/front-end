@@ -3,7 +3,7 @@ import { Avatar, Icon, Badge, Menu, Dropdown} from 'antd';
 import {connect} from 'dva'
 import { routerRedux } from 'dva/router';
 import {getlocalStorage} from "../../utils/helper";
-import style from './personal.css'
+import style from './Personal.css'
 
 function logout(dispatch) {
   dispatch({
@@ -34,10 +34,25 @@ class Personal extends Component{
     }
   }
 
+  selectMenu = ({ key }) => {
+    if (key === 'UserSetting' || key === 'UserCenter') {
+      this.props.dispatch({
+        type: 'admin/selectMenu',
+        payload: key
+      });
+      this.props.dispatch({
+        type: 'admin/openSelectKey',
+        payload: 'Account'
+      });
+    }
+  };
+
   render() {
     const { face, name, is_authorization, dispatch, isMobile } = this.props;
     const DropdownList = (
-      <Menu>
+      <Menu
+        onClick={this.selectMenu}
+      >
         <Menu.Item key='user'>
           <Icon type='user'/>
           {_renderName(name, is_authorization)}
@@ -49,18 +64,16 @@ class Personal extends Component{
           <Icon type="home" />首页
         </Menu.Item>
         <Menu.Item
-          disabled
-          key='edit'
+          key='UserCenter'
         >
           <Icon type='edit'/>
-          个人设置
+          个人中心
         </Menu.Item>
         <Menu.Item
-          disabled
-          key='setting'
+          key='UserSetting'
         >
           <Icon type='setting'/>
-          系统设置
+          个人设置
         </Menu.Item>
         <Menu.Item
           key='logout'

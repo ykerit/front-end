@@ -91,7 +91,7 @@ class MdeEditorPage extends Component {
           {...editOptions}
         >
           <MarkDownEdit
-            height={695}
+            height={700}
             onChange={this.onChange}
           />
         </ArticleEdit>

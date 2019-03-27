@@ -38,3 +38,9 @@ export async function queryComment(value) {
 export function queryTimeLine() {
   return request('filed')
 }
+
+export function delArticle(id) {
+  return request(`article/${id}`, {
+    method: 'DELETE',
+  })
+}
